@@ -1,0 +1,5 @@
+template:
+  params:
+    ganalytics: G-ZGP7W3HFCK
+    bootswatch: yeti
+    noindex: true
