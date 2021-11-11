@@ -4,7 +4,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of regweight is to ...
+The goal of regweight is to make it easy to diagnose a model using [Aronow and Samii (2015)](https://onlinelibrary.wiley.com/doi/abs/10.1111/ajps.12185) regression weights.
 
 ## Installation
 
