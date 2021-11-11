@@ -24,7 +24,7 @@ calculate_weights <- function(mod, term) {
             x = "`stats::lm`",
             x = "`estimatr::lm_robust`"
         ),
-        class = "regweights_model_argument"
+        class = "regweight_model_argument"
         )
     }
 
@@ -32,7 +32,7 @@ calculate_weights <- function(mod, term) {
     if (!is_char) {
         rlang::abort(
             "`term` argument must be a character vector of length 1.",
-            class = "regweights_term_argument"
+            class = "regweight_term_argument"
         )
     }
 
@@ -78,6 +78,6 @@ calculate_weights <- function(mod, term) {
 
     names(o$weights) <- NULL
 
-    class(o) <- "regweights"
+    class(o) <- "regweight"
     o
 }

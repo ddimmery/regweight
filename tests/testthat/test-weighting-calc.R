@@ -7,12 +7,12 @@ test_that("calculate_weights basically works", {
 
     checkmate::expect_class(
         w1 <- calculate_weights(m1, "a"),
-        "regweights"
+        "regweight"
     )
 
     checkmate::expect_class(
         w2 <- calculate_weights(m2, "a"),
-        "regweights"
+        "regweight"
     )
 
     expect_equal(w1$weights, w2$weights)
@@ -30,12 +30,12 @@ test_that("calculate_weights works gracefully with missingness", {
 
     checkmate::expect_class(
         w1 <- calculate_weights(m1, "a"),
-        "regweights"
+        "regweight"
     )
 
     checkmate::expect_class(
         w2 <- calculate_weights(m2, "a"),
-        "regweights"
+        "regweight"
     )
 
     expect_equal(w1$weights, w2$weights)

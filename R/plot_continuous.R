@@ -13,7 +13,7 @@
 #' @importFrom lpdensity lpdensity
 #' @importFrom dplyr tibble
 plot_weighting_continuous <- function(mod, covariate, alpha = 0.05, ...) {
-    checkmate::assert_class(mod, "regweights")
+    checkmate::assert_class(mod, "regweight")
 
     tbl <- dplyr::tibble(
         weights = mod$weights / sum(mod$weights),

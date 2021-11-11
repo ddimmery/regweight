@@ -12,7 +12,7 @@
 #' @importFrom ggplot2 theme_minimal
 #' @importFrom dplyr tibble group_by summarize mutate n
 plot_weighting_discrete <- function(mod, covariate, alpha = 0.05, ...) {
-    checkmate::assert_class(mod, "regweights")
+    checkmate::assert_class(mod, "regweight")
 
     tbl <- dplyr::tibble(
         weights = mod$weights / sum(mod$weights),

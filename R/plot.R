@@ -25,10 +25,10 @@ plot.regweights <- function(mod, covariate, ...) {
             c(
                 "The type of `covariate` cannot be determined.",
                 "Directly use individual plotting functions:",
-                " " = "`regweights::plot_weighting_discrete`",
-                " " = "`regweights::plot_weighting_continuous`"
+                " " = "`regweight::plot_weighting_discrete`",
+                " " = "`regweight::plot_weighting_continuous`"
             ),
-            class = "regweights_plot_type"
+            class = "regweight_plot_type"
         )
     }
 }
