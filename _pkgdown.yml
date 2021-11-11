@@ -3,3 +3,7 @@ template:
     ganalytics: G-ZGP7W3HFCK
     bootswatch: yeti
     noindex: true
+navbar:
+  structure:
+    left:  [home, reference, tutorials, news]
+    right: [github]
