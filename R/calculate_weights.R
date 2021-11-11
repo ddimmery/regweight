@@ -1,5 +1,5 @@
 #' Calculate regression weights
-#' 
+#'
 #' Given a model and a term of interest, calculate
 #' the Aronow and Samii (2015) regression weights and return
 #' an object which can be used to diagnose these implicit
@@ -12,8 +12,8 @@
 #' @importFrom checkmate test_class test_character
 #' @importFrom rlang abort
 #' @importFrom stats setNames
-#' @import estimatr
 #' @importFrom glue glue
+#' @export
 calculate_weights <- function(mod, term) {
     is_lm <- checkmate::test_class(mod, "lm")
     is_lmr <- checkmate::test_class(mod, "lm_robust")
@@ -59,19 +59,19 @@ calculate_weights <- function(mod, term) {
     o <- list()
 
     o$term <- term
-
+    mdf <- stats::model.frame(wt_lm, na.action = stats::na.pass)
     if (is_lm) {
-        n <- nrow(stats::model.frame(wt_lm, na.action = na.pass))
+        n <- nrow(mdf)
         o$weights <- rep(NA, n)
-        if (is.null(na.action(wt_lm))) {
+        if (is.null(stats::na.action(wt_lm))) {
             idx <- 1:n
         } else {
-            idx <- (1:n)[-na.action(wt_lm)]
+            idx <- (1:n)[-stats::na.action(wt_lm)]
         }
         o$weights[idx] <- stats::residuals(wt_lm) ^ 2
     } else {
         o$weights <- (
-            stats::model.frame(wt_lm, na.action = na.pass)[[wt_lm$outcome]] - 
+            mdf[[wt_lm$outcome]] -
             stats::predict(wt_lm)
         ) ^ 2
     }

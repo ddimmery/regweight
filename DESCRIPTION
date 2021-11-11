@@ -22,5 +22,6 @@ Imports:
     checkmate,
     rlang,
     dplyr,
-    glue
+    glue,
+    lpdensity
 Config/testthat/edition: 3

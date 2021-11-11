@@ -4,17 +4,14 @@
 \alias{plot.regweights}
 \title{Plot diagnostics for implicit regression weights}
 \usage{
-\method{plot}{regweights}(mod, covariate, ...)
+\method{plot}{regweights}(x, covariate, ...)
 }
 \arguments{
-\item{mod}{Weighting model object}
+\item{x}{Weighting model object}
 
 \item{covariate}{Covariate vector}
 
 \item{...}{additional arguments passed to plotting functions}
-
-\item{alpha}{Number between zero and one indicating the desired alpha level
-for confidence intervals.}
 }
 \description{
 This provid

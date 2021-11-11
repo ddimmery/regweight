@@ -1,4 +1,11 @@
+^LICENSE\.md$
+.lintr
+.covrignore
 ^\.github$
+^README\.Rmd$
+^codecov\.yml$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^doc$
+^Meta$
