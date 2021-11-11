@@ -1,0 +1,26 @@
+Package: regweight
+Title: Convenience functions for Aronow and Samii (2015) regression weights
+Version: 0.0.1
+Authors@R: 
+    person(given = "Drew",
+           family = "Dimmery",
+           role = c("aut", "cre"),
+           email = "drew.dimmery@univie.ac.at",
+           comment = c(ORCID = "0000-0001-9602-6325"))
+Description: This package provides a simple wrapper for calculating regression weights and provides 
+    easy default visualizations for these weights.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Suggests:
+    estimatr,
+    testthat (>= 3.0.0)
+Imports:
+    ggplot2,
+    checkmate,
+    rlang,
+    dplyr,
+    glue
+Config/testthat/edition: 3
