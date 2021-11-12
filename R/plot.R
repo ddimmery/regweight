@@ -9,24 +9,26 @@
 #' @importFrom checkmate test_character
 #' @importFrom rlang abort
 #' @export
-plot.regweights <- function(x, covariate, ...) {
+plot.regweight <- function(x, covariate, ...) {
     num_levels <- length(unique(covariate))
     lvl_pc <- num_levels / length(covariate)
 
+    is_fct <- checkmate::test_factor(covariate)
     is_char <- checkmate::test_character(covariate)
+    is_unq_numeric <- checkmate::test_numeric(covariate, unique = TRUE)
     is_numeric <- checkmate::test_numeric(covariate)
 
-    if (is_char || num_levels < 20 || lvl_pc < 0.25) {
+    if (is_fct || is_char || num_levels < 20 || lvl_pc < 0.25) {
         plot_weighting_discrete(x, covariate, ...)
-    } else if (is_numeric) {
+    } else if (is_unq_numeric || (is_numeric && lvl_pc > 0.75)) {
         plot_weighting_continuous(x, covariate, ...)
     } else {
         rlang::abort(
             c(
                 "The type of `covariate` cannot be determined.",
                 "Directly use individual plotting functions:",
-                " " = "`regweight::plot_weighting_discrete`",
-                " " = "`regweight::plot_weighting_continuous`"
+                "i" = "`regweight::plot_weighting_discrete`",
+                "i" = "`regweight::plot_weighting_continuous`"
             ),
             class = "regweight_plot_type"
         )

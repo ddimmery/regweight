@@ -37,15 +37,27 @@ calculate_weights <- function(mod, term) {
     }
 
     terms <- names(stats::coef(mod))
-    term_of_interest <- match.arg(term, terms)
+    term_of_interest <- grep(term, terms, value = TRUE)
 
     if (length(term_of_interest) < 1) {
         rlang::abort(
             c(
                 "Provided `term` matches no terms in the model.",
                 i = "Valid terms are:",
-                " " = paste(terms, collapse = ", ")
-            )
+                paste(terms, collapse = ", ")
+            ),
+            class = "regweight_term_argument"
+        )
+    }
+
+    if (length(term_of_interest) > 1) {
+        rlang::abort(
+            c(
+                "Provided `term` matches multiple terms in the model.",
+                i = glue::glue("Provided term, `{term}`, matches:"),
+                term_of_interest
+            ),
+            class = "regweight_term_argument"
         )
     }
 
