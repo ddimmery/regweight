@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • regweight</title>
+<title>Plot weights in a choropleth — plot_weighting_map • regweight</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Plot weights in a choropleth — plot_weighting_map" />
+<meta property="og:description" content="This provid" />
 
 <meta name="robots" content="noindex" />
 
@@ -68,7 +69,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -113,66 +114,47 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Plot weights in a choropleth</h1>
+    
+    <div class="hidden name"><code>plot_weighting_map.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>This provid</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>plot_weighting_map</span><span class='op'>(</span><span class='va'>mod</span>, <span class='va'>covariate</span>, <span class='va'>map</span>, alpha <span class='op'>=</span> <span class='fl'>0.05</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="calculate_weights.html">calculate_weights()</a></code> </p>
-        </td>
-        <td><p>Calculate regression weights</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot.regweight.html">plot(<i>&lt;regweight&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Plot diagnostics for implicit regression weights</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_weighting_continuous.html">plot_weighting_continuous()</a></code> </p>
-        </td>
-        <td><p>Plot weights across a continuous covariate</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_weighting_discrete.html">plot_weighting_discrete()</a></code> </p>
-        </td>
-        <td><p>Plot weights subdivided by a discrete covariate</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_weighting_map.html">plot_weighting_map()</a></code> </p>
-        </td>
-        <td><p>Plot weights in a choropleth</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>mod</th>
+      <td><p>Weighting model object</p></td>
+    </tr>
+    <tr>
+      <th>covariate</th>
+      <td><p>Covariate vector</p></td>
+    </tr>
+    <tr>
+      <th>map</th>
+      <td><p>Map object</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>Number between zero and one indicating the desired alpha level
+for confidence intervals.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional arguments</p></td>
+    </tr>
     </table>
-  </div>
 
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
