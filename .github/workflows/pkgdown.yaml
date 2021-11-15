@@ -20,6 +20,13 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
         with:
           use-public-rspm: true
+      
+      - name: "[Custom block] [macOS] Install spatial libraries"
+        if: runner.os == 'macOS'
+        run: |
+          # conflicts with gfortran from r-lib/actions when linking gcc
+          rm '/usr/local/bin/gfortran'
+          brew install pkg-config gdal proj geos
 
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
