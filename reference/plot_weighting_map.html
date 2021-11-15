@@ -125,7 +125,7 @@
     <p>This provid</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_weighting_map</span><span class='op'>(</span><span class='va'>mod</span>, <span class='va'>covariate</span>, <span class='va'>map</span>, alpha <span class='op'>=</span> <span class='fl'>0.05</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>plot_weighting_map</span><span class='op'>(</span><span class='va'>mod</span>, <span class='va'>geometry</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,17 +135,9 @@
       <td><p>Weighting model object</p></td>
     </tr>
     <tr>
-      <th>covariate</th>
-      <td><p>Covariate vector</p></td>
-    </tr>
-    <tr>
-      <th>map</th>
-      <td><p>Map object</p></td>
-    </tr>
-    <tr>
-      <th>alpha</th>
-      <td><p>Number between zero and one indicating the desired alpha level
-for confidence intervals.</p></td>
+      <th>geometry</th>
+      <td><p>A column of class <code><a href='https://r-spatial.github.io/sf/reference/sf.html'>sf::sf</a></code> with the geometry associated with
+each observation.</p></td>
     </tr>
     <tr>
       <th>...</th>
