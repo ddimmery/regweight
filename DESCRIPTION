@@ -17,6 +17,8 @@ RoxygenNote: 7.1.2
 Suggests:
     covr,
     estimatr,
+    USAboundaries,
+    sf,
     testthat (>= 3.0.0)
 Imports:
     ggplot2,
@@ -24,5 +26,6 @@ Imports:
     rlang,
     dplyr,
     glue,
-    lpdensity
+    lpdensity,
+    scales
 Config/testthat/edition: 3

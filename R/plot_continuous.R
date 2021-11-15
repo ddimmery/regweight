@@ -10,11 +10,13 @@
 #' @importFrom ggplot2 scale_fill_manual scale_color_manual
 #' @importFrom ggplot2 scale_alpha_continuous scale_linetype_discrete
 #' @importFrom ggplot2 theme_minimal
+#' @importFrom checkmate assert_class assert_numeric
 #' @importFrom lpdensity lpdensity
 #' @importFrom dplyr tibble %>%
 #' @export
 plot_weighting_continuous <- function(mod, covariate, alpha = 0.05, ...) {
     checkmate::assert_class(mod, "regweight")
+    checkmate::assert_numeric(covariate)
 
     tbl <- dplyr::tibble(
         weights = mod$weights / sum(mod$weights),

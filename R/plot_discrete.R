@@ -10,6 +10,7 @@
 #' @importFrom ggplot2 scale_fill_manual scale_color_manual
 #' @importFrom ggplot2 scale_alpha_continuous scale_linetype_discrete
 #' @importFrom ggplot2 theme_minimal
+#' @importFrom scales percent
 #' @importFrom dplyr tibble group_by summarize mutate n %>%
 #' @importFrom rlang .data
 #' @export
@@ -48,7 +49,7 @@ plot_weighting_discrete <- function(mod, covariate, alpha = 0.05, ...) {
     ) +
     ggplot2::expand_limits(y = 0) +
     ggplot2::scale_x_discrete("") +
-    ggplot2::scale_y_continuous("Probability mass (%)") +
+    ggplot2::scale_y_continuous("Probability mass (%)", labels = scales::percent) +
     ggplot2::scale_color_manual("",
         values = c("Implicit regression" = "black", "Nominal" = "red")
     ) +

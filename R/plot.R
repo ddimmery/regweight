@@ -17,18 +17,22 @@ plot.regweight <- function(x, covariate, ...) {
     is_char <- checkmate::test_character(covariate)
     is_unq_numeric <- checkmate::test_numeric(covariate, unique = TRUE)
     is_numeric <- checkmate::test_numeric(covariate)
+    is_sfc <- checkmate::test_class(covariate, "sfc")
 
     if (is_fct || is_char || num_levels < 20 || lvl_pc < 0.25) {
         plot_weighting_discrete(x, covariate, ...)
     } else if (is_unq_numeric || (is_numeric && lvl_pc > 0.75)) {
         plot_weighting_continuous(x, covariate, ...)
+    } else if (is_sfc) {
+        plot_weighting_map(x, covariate, ...)
     } else {
         rlang::abort(
             c(
                 "The type of `covariate` cannot be determined.",
                 "Directly use individual plotting functions:",
                 "i" = "`regweight::plot_weighting_discrete`",
-                "i" = "`regweight::plot_weighting_continuous`"
+                "i" = "`regweight::plot_weighting_continuous`",
+                "i" = "`regweight::plot_weighting_map`"
             ),
             class = "regweight_plot_type"
         )

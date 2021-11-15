@@ -4,17 +4,13 @@
 \alias{plot_weighting_map}
 \title{Plot weights in a choropleth}
 \usage{
-plot_weighting_map(mod, covariate, map, alpha = 0.05, ...)
+plot_weighting_map(mod, geometry, ...)
 }
 \arguments{
 \item{mod}{Weighting model object}
 
-\item{covariate}{Covariate vector}
-
-\item{map}{Map object}
-
-\item{alpha}{Number between zero and one indicating the desired alpha level
-for confidence intervals.}
+\item{geometry}{A column of class \code{sf::sf} with the geometry associated with
+each observation.}
 
 \item{...}{additional arguments}
 }

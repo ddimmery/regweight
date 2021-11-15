@@ -88,6 +88,8 @@ calculate_weights <- function(mod, term) {
         ) ^ 2
     }
 
+    o$weights <- o$weights / sum(o$weights, rm.na = FALSE) * length(o$weights)
+
     names(o$weights) <- NULL
 
     class(o) <- "regweight"
