@@ -17,7 +17,7 @@
 #' @export
 plot_weighting_map <- function(mod, geometry, ...) {
     rlang::check_installed("sf")
-    try(attachNamespace("sf"))
+    try(attachNamespace("sf"), silent = TRUE)
     checkmate::assert_class(mod, "regweight")
     checkmate::assert_class(geometry, "sfc")
 

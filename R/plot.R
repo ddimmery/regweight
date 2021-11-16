@@ -19,7 +19,7 @@ plot.regweight <- function(x, covariate, ...) {
     is_numeric <- checkmate::test_numeric(covariate)
     is_sfc <- checkmate::test_class(covariate, "sfc")
 
-    if (is_fct || is_char || num_levels < 20 || lvl_pc < 0.25) {
+    if (!is_sfc && (is_fct || is_char || num_levels < 20 || lvl_pc < 0.25)) {
         plot_weighting_discrete(x, covariate, ...)
     } else if (is_unq_numeric || (is_numeric && lvl_pc > 0.75)) {
         plot_weighting_continuous(x, covariate, ...)
