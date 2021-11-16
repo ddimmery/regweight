@@ -161,7 +161,30 @@ element of <code>coef(mod)</code>).</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p>This calculates the implicit regression weights for a particular term
+in a given regression model.</p>
+<p>In short, this calculates the weights for a coefficient \(\beta\) such that:</p>
+<p>$$\frac{\mathbb{E}[w_i \beta_i]}{\mathbb{E}[w_i]} \to \beta$$</p>
+<p>where \(\beta_i\) is the unit level effect. The expectation of \(w_i\) is the
+conditional variance of the variable of interest.</p>
+<p>For details and examples, view the vignette:
+<code><a href='../articles/example-usage.html'>vignette("example-usage", package = "regweight")</a></code></p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Aronow, P.M. and Samii, C. (2016), Does Regression Produce
+Representative Estimates of Causal Effects?. <em>American Journal of Political
+Science</em>, 60: 250-267. https://doi.org/10.1111/ajps.12185</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='r-in'><span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Binomial.html'>rbinom</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>m1</span> <span class='op'>&lt;-</span> <span class='fu'>stats</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>y</span> <span class='op'>~</span> <span class='va'>a</span> <span class='op'>+</span> <span class='va'>x</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>w1</span> <span class='op'>&lt;-</span> <span class='fu'>calculate_weights</span><span class='op'>(</span><span class='va'>m1</span>, <span class='st'>"a"</span><span class='op'>)</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -88,6 +88,8 @@
 <!-- badges: start -->
 
 <p>The goal of regweight is to make it easy to diagnose a model using <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/ajps.12185">Aronow and Samii (2015)</a> regression weights.</p>
+<p>In short, these weights show which observations are most influential for determining the observed value of a coefficient in a linear regression. If the linear regression is aiming to estimate causal effects, this implies that the OLS <em>estimand</em> may differ from the average treatment effect. These linear regression weights provide, in some sense, the most precise estimate available given a conditioning set (and a linear model). These weights are in expectation the conditional variance of the variable of interest (given the other covariates in the model).</p>
+<p>For more details, see <code><a href="articles/example-usage.html">vignette("example-usage")</a></code>.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>

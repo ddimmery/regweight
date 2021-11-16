@@ -110,7 +110,7 @@ Y = \alpha + \tau A + \beta \boldsymbol{X}
 \]</span></p>
 <p>In the presence of heterogeneity in the effect of <span class="math inline">\(A\)</span> on <span class="math inline">\(Y\)</span>, however, <span class="math inline">\(\hat{\tau}\)</span> will be a weighted average of the unit-specific effects, <span class="math inline">\(\tau_i\)</span>:</p>
 <p><span class="math display">\[
-\frac{\mathbb{E}[w_i \tau_i]}{\mathbb{E}[w_i]} \mathrm{ where } w_i = (A_i - \mathbb{E}[A_i \mid X_i])^2
+\frac{\mathbb{E}[w_i \tau_i]}{\mathbb{E}[w_i]}\quad \mathrm{where}\; w_i = (A_i - \mathbb{E}[A_i \mid X_i])^2
 \]</span></p>
 <p>This weight is equal to the conditional variance of <span class="math inline">\(A\)</span> in expectation: <span class="math inline">\(\mathbb{E}[w_i \mid X_i] = \mathrm{var}(A_i \mid X_i)\)</span>.</p>
 <p>These weights can be easily estimated through a partial linear regression of the form:</p>
