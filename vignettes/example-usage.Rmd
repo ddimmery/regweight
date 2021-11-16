@@ -58,7 +58,9 @@ This is distinct from more conventional regression diagnostics like leverage, be
 ```{r setup}
 library(dplyr)
 library(ggplot2)
-library(regweight)
+library(sf)
+#library(regweight)
+devtools::load_all()
 data("LaLonde", package = "CBPS")
 
 df <- filter(LaLonde, (exper == 1 && treat == 1) || (exper == 0 && treat == 0))
@@ -71,6 +73,12 @@ summary(model)
 ```
 
 # Examine regression weights
+
+Plots will make a best effort to infer the appropriate type of a given covariate. If you aren't happy with how they look, it's simple enough to use the underlying functions called by the S3 method directly. They are:
+
+* `regweight::plot_weighting_discrete`
+* `regweight::plot_weighting_continuous`
+* `regweight::plot_weighting_map`
 
 ```{r}
 rw_mod <- calculate_weights(model, "treat")
@@ -97,4 +105,18 @@ plot(rw_mod, df$age) + scale_x_continuous("Age")
 
 ```{r}
 plot(rw_mod, df$re74) + scale_x_continuous("Income (1974)")
+```
+
+# Mapping
+
+For the sake of example, let's imagine that we had geographical information on each unit, as well. Geometries/shapes should be specified in `sf::sfc` format.
+
+```{r fig.width = 6}
+state_shapes <- USAboundaries::us_states()
+state_shapes <- filter(state_shapes, !(state_abbr %in% c("HI", "PR", "AK")))
+pr_state <- seq(1, 10, length = nrow(state_shapes))
+pr_state <- pr_state / sum(pr_state)
+df$geometry <- sample(state_shapes$geometry, nrow(df), replace = TRUE, prob = pr_state)
+
+plot(rw_mod, df$geometry)
 ```

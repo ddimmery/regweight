@@ -21,7 +21,7 @@ plot_weighting_map <- function(mod, geometry, ...) {
     checkmate::assert_class(mod, "regweight")
     checkmate::assert_class(geometry, "sfc")
 
-    df <- dplyr::tibble(weights = mod$weights, geometry = geometry) %>%
+    df <- dplyr::tibble(weights = mod$weights / sum(mod$weights, na.rm = TRUE), geometry = geometry) %>%
     sf::st_as_sf()
 
     agg_df <- stats::aggregate(df, by = df$geometry, sum)
@@ -32,7 +32,6 @@ plot_weighting_map <- function(mod, geometry, ...) {
         "Implicit regression weight",
         low = "#ffffff",
         high = "#000000",
-        trans = "log10",
         labels = scales::percent
     ) +
     ggplot2::theme_void() +
