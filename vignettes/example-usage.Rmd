@@ -1,0 +1,100 @@
+---
+title: "Example Usage"
+author: Drew Dimmery (drew.dimmery@gmail.com)
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+fig_width: 5
+fig_height: 5
+vignette: >
+  %\VignetteIndexEntry{Example Usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<style type="text/css">
+div.main-container {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(fig.width=5, fig.height=5) 
+```
+
+# Introduction
+
+Aronow and Samii (2015) provide a convenient way to understand why a linear regression provides the particular estimate that it does. Given the following linear model estimated by OLS,
+
+$$
+Y = \alpha + \tau A + \beta \boldsymbol{X}
+$$
+
+In the presence of heterogeneity in the effect of $A$ on $Y$, however, $\hat{\tau}$ will be a weighted average of the unit-specific effects, $\tau_i$:
+
+$$
+\frac{\mathbb{E}[w_i \tau_i]}{\mathbb{E}[w_i]} \mathrm{ where } w_i = (A_i - \mathbb{E}[A_i \mid X_i])^2
+$$
+
+This weight is equal to the conditional variance of $A$ in expectation: $\mathbb{E}[w_i \mid X_i] = \mathrm{var}(A_i \mid X_i)$.
+
+These weights can be easily estimated through a partial linear regression of the form:
+
+$$
+A = \gamma \boldsymbol{X}
+$$
+
+Implicit regression weights are then just the squared residuals of this regression.
+
+The intuition of this is all simply to show that a coefficient in OLS will, in general, be the up-weighted when it's harder to explain from the other covariates in the model. If a unit's $A_i$ is very easy to predict, then it will not figure prominently in the OLS estimate of the effect.
+
+This is distinct from more conventional regression diagnostics like leverage, because those focus on how the entire vector of coefficients change. Most analysts, however, have specific hypotheses on specific coefficients, however, so the implicit regression weights demonstrate, essentially, the term-specific leverage.
+
+# Load packages and setup environment
+
+```{r setup}
+library(dplyr)
+library(ggplot2)
+library(regweight)
+data("LaLonde", package = "CBPS")
+
+df <- filter(LaLonde, (exper == 1 && treat == 1) || (exper == 0 && treat == 0))
+
+model <- lm(
+  log(re78 + 1) ~ treat + age + educ + black + hisp + married + nodegr + log(re74 + 1) + log(re75 + 1) + re74.miss, 
+  df
+)
+summary(model)
+```
+
+# Examine regression weights
+
+```{r}
+rw_mod <- calculate_weights(model, "treat")
+hist(rw_mod) + scale_x_continuous("Weight")
+```
+
+## Discrete covariates
+```{r}
+plot(rw_mod, df$married) + scale_x_continuous("Married", breaks = c(0,1))
+```
+
+```{r}
+plot(rw_mod, df$nodegr) + scale_x_continuous("No degree", breaks = c(0,1))
+```
+
+```{r}
+plot(rw_mod, df$black) + scale_x_continuous("Black", breaks = c(0,1))
+```
+
+## Continuous covariates
+```{r}
+plot(rw_mod, df$age) + scale_x_continuous("Age")
+```
+
+```{r}
+plot(rw_mod, df$re74) + scale_x_continuous("Income (1974)")
+```

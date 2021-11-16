@@ -6,7 +6,7 @@ test_that("s3 plotting works", {
     x <- rnorm(100)
     cov <- runif(100)
     g <- sample(1:4, 100, replace = TRUE)
-    gish <- sample(1:35, 100, replace = TRUE)
+    a_df <- dplyr::tibble(a = letters[1:25], b = 1:25)
 
     m1 <- stats::lm(y ~ a + x)
     m2 <- estimatr::lm_robust(y ~ a + x)
@@ -20,8 +20,8 @@ test_that("s3 plotting works", {
     expect_error(plot(w1, g), NA)
     expect_error(plot(w2, g), NA)
 
-    expect_error(plot(w1, gish), class = "regweight_plot_type")
-    expect_error(plot(w2, gish), class = "regweight_plot_type")
+    expect_error(plot(w1, a_df), class = "regweight_plot_type")
+    expect_error(plot(w2, a_df), class = "regweight_plot_type")
 })
 
 test_that("s3 map plotting works", {

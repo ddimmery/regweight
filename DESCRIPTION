@@ -16,10 +16,14 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Suggests:
     covr,
+    CBPS,
+    devtools,
     estimatr,
     USAboundaries,
     sf,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
 Imports:
     ggplot2,
     checkmate,
@@ -29,3 +33,4 @@ Imports:
     lpdensity,
     scales
 Config/testthat/edition: 3
+VignetteBuilder: knitr
