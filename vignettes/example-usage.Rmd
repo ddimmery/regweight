@@ -59,8 +59,7 @@ This is distinct from more conventional regression diagnostics like leverage, be
 library(dplyr)
 library(ggplot2)
 library(sf)
-#library(regweight)
-devtools::load_all()
+library(regweight)
 data("LaLonde", package = "CBPS")
 
 df <- filter(LaLonde, (exper == 1 && treat == 1) || (exper == 0 && treat == 0))
@@ -114,6 +113,8 @@ For the sake of example, let's imagine that we had geographical information on e
 ```{r fig.width = 6}
 state_shapes <- USAboundaries::us_states()
 state_shapes <- filter(state_shapes, !(state_abbr %in% c("HI", "PR", "AK")))
+# Necessary due to https://github.com/r-spatial/sf/issues/1419
+suppressWarnings(st_crs(state_shapes) <- 4326)
 pr_state <- seq(1, 10, length = nrow(state_shapes))
 pr_state <- pr_state / sum(pr_state)
 df$geometry <- sample(state_shapes$geometry, nrow(df), replace = TRUE, prob = pr_state)
