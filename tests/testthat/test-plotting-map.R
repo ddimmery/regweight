@@ -1,6 +1,6 @@
 test_that("map plotting works", {
     skip_if_not_installed("sf")
-    try(attachNamespace("sf"), slient = TRUE)
+    try(attachNamespace("sf"), silent = TRUE)
     y <- rnorm(100)
     a <- rbinom(100, 1, 0.5)
     x <- rnorm(100)

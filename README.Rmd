@@ -1,0 +1,63 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# regweight
+
+<!-- badges: start -->
+[![codecov](https://codecov.io/gh/ddimmery/regweight/branch/main/graph/badge.svg?token=OG7J5YE3JB)](https://codecov.io/gh/ddimmery/regweight) [![R-CMD-check](https://github.com/ddimmery/regweight/actions/workflows/check-full.yaml/badge.svg)](https://github.com/ddimmery/regweight/actions/workflows/check-full.yaml) [![lint](https://github.com/ddimmery/regweight/actions/workflows/lint.yaml/badge.svg)](https://github.com/ddimmery/regweight/actions/workflows/lint.yaml)
+<!-- badges: end -->
+
+The goal of regweight is to make it easy to diagnose a model using [Aronow and Samii (2015)](https://onlinelibrary.wiley.com/doi/abs/10.1111/ajps.12185) regression weights.
+
+## Installation
+
+You can install the development version of regweight like so:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("ddimmery/regweight")
+```
+
+## Example
+
+This is a basic example which shows you how to analyze the implicit regression weights in a simple problem:
+
+```{r setup}
+library(regweight)
+data(penguins, package = "palmerpenguins")
+
+model <- lm(body_mass_g ~ ., penguins)
+summary(model)
+```
+
+Let's say that we want to explore the effect of `flipper_length_mm` on `body_mass_g`. Which units have high implict weight in estimating this effect?
+
+It's very easy to use `regweight` to answer this question:
+
+```{r regweight}
+rw_model <- calculate_weights(model, "flipper_length_mm")
+hist(rw_model)
+```
+
+We can see how the distribution of weights over islands varies:
+```{r discrete}
+plot(rw_model, penguins$island)
+```
+
+We can similarly see the implicit distribution of `bill_length_mm` in the nominal (unweighted) and implicit (regression weighted) sample:
+
+```{r cts}
+plot(rw_model, penguins$bill_length_mm)
+```

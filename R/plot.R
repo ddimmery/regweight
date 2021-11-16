@@ -21,7 +21,7 @@ plot.regweight <- function(x, covariate, ...) {
 
     if (!is_sfc && (is_fct || is_char || num_levels < 20 || lvl_pc < 0.25)) {
         plot_weighting_discrete(x, covariate, ...)
-    } else if (is_unq_numeric || (is_numeric && lvl_pc > 0.75)) {
+    } else if (is_unq_numeric || (is_numeric && lvl_pc > 0.40)) {
         plot_weighting_continuous(x, covariate, ...)
     } else if (is_sfc) {
         plot_weighting_map(x, covariate, ...)

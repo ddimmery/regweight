@@ -88,7 +88,7 @@ calculate_weights <- function(mod, term) {
         ) ^ 2
     }
 
-    o$weights <- o$weights / sum(o$weights, rm.na = FALSE) * length(o$weights)
+    o$weights <- o$weights / sum(o$weights, na.rm = TRUE) * sum(!is.na(o$weights))
 
     names(o$weights) <- NULL
 

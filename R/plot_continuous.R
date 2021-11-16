@@ -18,10 +18,10 @@ plot_weighting_continuous <- function(mod, covariate, alpha = 0.05, ...) {
     checkmate::assert_class(mod, "regweight")
     checkmate::assert_numeric(covariate)
 
-    tbl <- dplyr::tibble(
-        weights = mod$weights / sum(mod$weights),
-        covariate = covariate
-    )
+    ok <- stats::complete.cases(covariate, mod$weights)
+    n <- sum(ok)
+    covariate <- covariate[ok]
+    wts <- mod$weights[ok]
 
     range <- stats::quantile(covariate, probs = c(0.05, 0.95))
     eval_pts <- seq(range[1], range[2], length = 250)
@@ -29,7 +29,7 @@ plot_weighting_continuous <- function(mod, covariate, alpha = 0.05, ...) {
     wkde <- lpdensity::lpdensity(
         covariate,
         grid = eval_pts,
-        Pweights = mod$weights / sum(mod$weights) * length(covariate),
+        Pweights = wts / sum(wts) * n,
         kernel = "epanechnikov",
         bwselect = "imse-dpi"
     )
@@ -62,7 +62,7 @@ plot_weighting_continuous <- function(mod, covariate, alpha = 0.05, ...) {
     ggplot2::geom_line(aes(y = .data$density)) +
     ggplot2::geom_line(aes(y = .data$lwr), linetype = "dashed") +
     ggplot2::geom_line(aes(y = .data$upr), linetype = "dashed") +
-    ggplot2::scale_x_discrete("") +
+    ggplot2::scale_x_continuous("") +
     ggplot2::scale_y_continuous("Covariate density") +
     ggplot2::scale_fill_manual("",
         values = c("Implicit regression" = "black", "Nominal" = "red")

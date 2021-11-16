@@ -18,9 +18,10 @@ plot_weighting_discrete <- function(mod, covariate, alpha = 0.05, ...) {
     checkmate::assert_class(mod, "regweight")
 
     tbl <- dplyr::tibble(
-        weights = mod$weights / sum(mod$weights),
+        weights = mod$weights / sum(mod$weights, na.rm = TRUE),
         covariate = covariate
     ) %>%
+    dplyr::filter(stats::complete.cases(.data$covariate, .data$weights)) %>%
     dplyr::group_by(.data$covariate) %>%
     dplyr::summarize(
         n = dplyr::n(),

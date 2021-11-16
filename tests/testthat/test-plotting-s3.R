@@ -6,7 +6,7 @@ test_that("s3 plotting works", {
     x <- rnorm(100)
     cov <- runif(100)
     g <- sample(1:4, 100, replace = TRUE)
-    gish <- sample(1:85, 100, replace = TRUE)
+    gish <- sample(1:35, 100, replace = TRUE)
 
     m1 <- stats::lm(y ~ a + x)
     m2 <- estimatr::lm_robust(y ~ a + x)
