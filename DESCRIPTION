@@ -9,6 +9,7 @@ Authors@R:
            comment = c(ORCID = "0000-0001-9602-6325"))
 Description: This package provides a simple wrapper for calculating regression weights and provides 
     easy default visualizations for these weights.
+URL: https://github.com/ddimmery/regweight https://ddimmery.github.io/regweight/
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
