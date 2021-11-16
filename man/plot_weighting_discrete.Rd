@@ -14,8 +14,17 @@ plot_weighting_discrete(mod, covariate, alpha = 0.05, ...)
 \item{alpha}{Number between zero and one indicating the desired alpha level
 for confidence intervals.}
 
-\item{...}{additional arguments}
+\item{...}{unused arguments}
 }
 \description{
 This provid
+}
+\examples{
+y <- rnorm(100)
+a <- rbinom(100, 1, 0.5)
+x <- rnorm(100)
+g <- sample(1:4, 100, replace = TRUE)
+mod <- stats::lm(y ~ a + x)
+rw_mod <- calculate_weights(mod, "a")
+plot_weighting_discrete(rw_mod, g)
 }

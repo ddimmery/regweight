@@ -9,9 +9,10 @@
 \arguments{
 \item{x}{Weighting model object}
 
-\item{bw}{Bandwidth for histogram bins}
+\item{bw}{Bandwidth for histogram bins. If not provided, the
+Freedman-Diaconis rule will be used.}
 
-\item{...}{additional arguments passed to plotting functions}
+\item{...}{unused arguments}
 }
 \description{
 This provides a simple histogram of the Aronow and Samii (2015)

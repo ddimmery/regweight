@@ -5,7 +5,15 @@
 #' @param covariate Covariate vector
 #' @param alpha Number between zero and one indicating the desired alpha level
 #' for confidence intervals.
-#' @param ... additional arguments
+#' @param ... unused arguments
+#' @examples
+#' y <- rnorm(100)
+#' a <- rbinom(100, 1, 0.5)
+#' x <- rnorm(100)
+#' g <- sample(1:4, 100, replace = TRUE)
+#' mod <- stats::lm(y ~ a + x)
+#' rw_mod <- calculate_weights(mod, "a")
+#' plot_weighting_discrete(rw_mod, g)
 #' @importFrom ggplot2 ggplot aes geom_line scale_x_discrete scale_y_continuous
 #' @importFrom ggplot2 scale_fill_manual scale_color_manual
 #' @importFrom ggplot2 scale_alpha_continuous scale_linetype_discrete

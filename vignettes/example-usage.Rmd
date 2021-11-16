@@ -36,7 +36,7 @@ $$
 In the presence of heterogeneity in the effect of $A$ on $Y$, however, $\hat{\tau}$ will be a weighted average of the unit-specific effects, $\tau_i$:
 
 $$
-\frac{\mathbb{E}[w_i \tau_i]}{\mathbb{E}[w_i]} \mathrm{ where } w_i = (A_i - \mathbb{E}[A_i \mid X_i])^2
+\frac{\mathbb{E}[w_i \tau_i]}{\mathbb{E}[w_i]}\quad \mathrm{where}\; w_i = (A_i - \mathbb{E}[A_i \mid X_i])^2
 $$
 
 This weight is equal to the conditional variance of $A$ in expectation: $\mathbb{E}[w_i \mid X_i] = \mathrm{var}(A_i \mid X_i)$.

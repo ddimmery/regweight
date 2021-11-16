@@ -11,8 +11,11 @@
 
 \item{covariate}{Covariate vector}
 
-\item{...}{additional arguments passed to plotting functions}
+\item{...}{additional arguments passed to individual plotting functions}
 }
 \description{
-This provid
+This provides access to plotting functions
+}
+\seealso{
+\code{\link[=calculate_weights]{calculate_weights()}}, \code{\link[=plot_weighting_discrete]{plot_weighting_discrete()}}, \code{\link[=plot_weighting_continuous]{plot_weighting_continuous()}}, \code{\link[=plot_weighting_map]{plot_weighting_map()}}
 }

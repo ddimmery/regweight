@@ -4,8 +4,9 @@
 #' implicit regression weights.
 #'
 #' @param x Weighting model object
-#' @param bw Bandwidth for histogram bins
-#' @param ... additional arguments passed to plotting functions
+#' @param bw Bandwidth for histogram bins. If not provided, the 
+#' Freedman-Diaconis rule will be used.
+#' @param ... unused arguments
 #' @importFrom ggplot2 ggplot aes geom_histogram theme_minimal
 #' @importFrom ggplot2 scale_x_log10 expand_limits
 #' @importFrom dplyr tibble group_by summarize mutate n

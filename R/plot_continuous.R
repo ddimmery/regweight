@@ -1,11 +1,29 @@
 #' Plot weights across a continuous covariate
 #'
-#' This provid
+#' This provides a plot showing the marginal distribution of a covariate
+#' under the implied regression weights and without weights.
 #' @param mod Weighting model object
 #' @param covariate Covariate vector
 #' @param alpha Number between zero and one indicating the desired alpha level
 #' for confidence intervals.
-#' @param ... additional arguments
+#' @param ... unused arguments
+#' @details 
+#' Kernel density estimates use the bias-corrected methods of Cattaneo et al (2020).
+#' @examples
+#' y <- rnorm(100)
+#' a <- rbinom(100, 1, 0.5)
+#' x <- rnorm(100)
+#' cov <- runif(100)
+#' mod <- stats::lm(y ~ a + x)
+#' rw_mod <- calculate_weights(mod, "a")
+#' plot_weighting_continuous(rw_mod, cov)
+#' @seealso [lpdensity::lpdensity()]
+#' @references \itemize{
+#'  \item Cattaneo, Jansson and Ma (2021): lpdensity: Local Polynomial Density Estimation and Inference. 
+#' *Journal of Statistical Software*, forthcoming.
+#'  \item Cattaneo, Jansson and Ma (2020): Simple Local Polynomial Density Estimators. 
+#' *Journal of the American Statistical Association* 115(531): 1449-1455.
+#' }
 #' @importFrom ggplot2 ggplot aes geom_line scale_x_discrete scale_y_continuous
 #' @importFrom ggplot2 scale_fill_manual scale_color_manual
 #' @importFrom ggplot2 scale_alpha_continuous scale_linetype_discrete

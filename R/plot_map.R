@@ -2,9 +2,10 @@
 #'
 #' This provid
 #' @param mod Weighting model object
-#' @param geometry A column of class `sf::sf` with the geometry associated with
+#' @param geometry A column of class `sf::sfc` with the geometry associated with
 #' each observation.
-#' @param ... additional arguments
+#' @param ... unused arguments
+#' @seealso [hist.regweight()], [plot.regweight()], [sf::sfc()]
 #' @importFrom ggplot2 ggplot aes geom_line scale_x_discrete scale_y_continuous
 #' @importFrom ggplot2 scale_fill_manual scale_color_manual
 #' @importFrom ggplot2 scale_alpha_continuous scale_linetype_discrete

@@ -21,6 +21,10 @@ knitr::opts_chunk$set(
 
 The goal of regweight is to make it easy to diagnose a model using [Aronow and Samii (2015)](https://onlinelibrary.wiley.com/doi/abs/10.1111/ajps.12185) regression weights.
 
+In short, these weights show which observations are most influential for determining the observed value of a coefficient in a linear regression. If the linear regression is aiming to estimate causal effects, this implies that the OLS *estimand* may differ from the average treatment effect. These linear regression weights provide, in some sense, the most precise estimate available given a conditioning set (and a linear model). These weights are in expectation the conditional variance of the variable of interest (given the other covariates in the model).
+
+For more details, see `vignette("example-usage")`.
+
 ## Installation
 
 You can install the development version of regweight like so:

@@ -9,11 +9,14 @@ plot_weighting_map(mod, geometry, ...)
 \arguments{
 \item{mod}{Weighting model object}
 
-\item{geometry}{A column of class \code{sf::sf} with the geometry associated with
+\item{geometry}{A column of class \code{sf::sfc} with the geometry associated with
 each observation.}
 
-\item{...}{additional arguments}
+\item{...}{unused arguments}
 }
 \description{
 This provid
+}
+\seealso{
+\code{\link[=hist.regweight]{hist.regweight()}}, \code{\link[=plot.regweight]{plot.regweight()}}, \code{\link[sf:sfc]{sf::sfc()}}
 }

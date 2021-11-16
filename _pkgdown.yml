@@ -7,3 +7,14 @@ navbar:
   structure:
     left:  [home, reference, tutorials, news]
     right: [github]
+reference:
+- title: Estimation
+- contents:
+  - calculate_weights
+- title: Plotting
+- contents: 
+  - hist.regweight
+  - plot.regweight
+  - plot_weighting_discrete
+  - plot_weighting_continuous
+  - plot_weighting_map

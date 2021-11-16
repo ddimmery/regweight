@@ -1,9 +1,10 @@
 #' Plot diagnostics for implicit regression weights
 #'
-#' This provid
+#' This provides access to plotting functions
 #' @param x Weighting model object
 #' @param covariate Covariate vector
-#' @param ... additional arguments passed to plotting functions
+#' @param ... additional arguments passed to individual plotting functions
+#' @seealso [calculate_weights()], [plot_weighting_discrete()], [plot_weighting_continuous()], [plot_weighting_map()]
 #' @importFrom ggplot2 ggplot aes geom_pointrange geom_point
 #' @importFrom dplyr tibble group_by summarize mutate n
 #' @importFrom checkmate test_character

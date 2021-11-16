@@ -20,3 +20,30 @@ the Aronow and Samii (2015) regression weights and return
 an object which can be used to diagnose these implicit
 weights.
 }
+\details{
+This calculates the implicit regression weights for a particular term
+in a given regression model.
+
+In short, this calculates the weights for a coefficient \eqn{\beta} such that:
+
+\deqn{\frac{\mathbb{E}[w_i \beta_i]}{\mathbb{E}[w_i]} \to \beta}
+
+where \eqn{\beta_i} is the unit level effect. The expectation of \eqn{w_i} is the
+conditional variance of the variable of interest.
+
+For details and examples, view the vignette:
+\code{vignette("example-usage", package = "regweight")}
+}
+\examples{
+y <- rnorm(100)
+a <- rbinom(100, 1, 0.5)
+x <- rnorm(100)
+m1 <- stats::lm(y ~ a + x)
+
+w1 <- calculate_weights(m1, "a")
+}
+\references{
+Aronow, P.M. and Samii, C. (2016), Does Regression Produce
+Representative Estimates of Causal Effects?. \emph{American Journal of Political
+Science}, 60: 250-267. https://doi.org/10.1111/ajps.12185
+}
