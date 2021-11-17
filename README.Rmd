@@ -40,9 +40,10 @@ This is a basic example which shows you how to analyze the implicit regression w
 
 ```{r setup}
 library(regweight)
+library(estimatr)
 data(penguins, package = "palmerpenguins")
 
-model <- lm(body_mass_g ~ ., penguins)
+model <- lm_robust(body_mass_g ~ ., penguins)
 summary(model)
 ```
 

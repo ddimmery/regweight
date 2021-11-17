@@ -42,37 +42,32 @@ regression weights in a simple problem:
 
 ``` r
 library(regweight)
+library(estimatr)
 data(penguins, package = "palmerpenguins")
 
-model <- lm(body_mass_g ~ ., penguins)
+model <- lm_robust(body_mass_g ~ ., penguins)
 summary(model)
 #> 
 #> Call:
-#> lm(formula = body_mass_g ~ ., data = penguins)
+#> lm_robust(formula = body_mass_g ~ ., data = penguins)
 #> 
-#> Residuals:
-#>     Min      1Q  Median      3Q     Max 
-#> -809.70 -180.87   -6.25  176.76  864.22 
+#> Standard error type:  HC2 
 #> 
 #> Coefficients:
-#>                    Estimate Std. Error t value Pr(>|t|)    
-#> (Intercept)       84087.945  41912.019   2.006  0.04566 *  
-#> speciesChinstrap   -282.539     88.790  -3.182  0.00160 ** 
-#> speciesGentoo       890.958    144.563   6.163 2.12e-09 ***
-#> islandDream         -21.180     58.390  -0.363  0.71704    
-#> islandTorgersen     -58.777     60.852  -0.966  0.33482    
-#> bill_length_mm       18.964      7.112   2.667  0.00805 ** 
-#> bill_depth_mm        60.798     20.002   3.040  0.00256 ** 
-#> flipper_length_mm    18.504      3.128   5.915 8.46e-09 ***
-#> sexmale             378.977     48.074   7.883 4.95e-14 ***
-#> year                -42.785     20.949  -2.042  0.04194 *  
-#> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#>                   Estimate Std. Error t value  Pr(>|t|) CI Lower   CI Upper  DF
+#> (Intercept)       84087.94  41946.611  2.0046 4.584e-02 1564.884 166611.005 323
+#> speciesChinstrap   -282.54     79.288 -3.5635 4.212e-04 -438.525   -126.554 323
+#> speciesGentoo       890.96    132.512  6.7236 8.048e-11  630.263   1151.653 323
+#> islandDream         -21.18     56.015 -0.3781 7.056e-01 -131.380     89.019 323
+#> islandTorgersen     -58.78     63.182 -0.9303 3.529e-01 -183.078     65.524 323
+#> bill_length_mm       18.96      6.214  3.0516 2.465e-03    6.738     31.190 323
+#> bill_depth_mm        60.80     18.841  3.2270 1.379e-03   23.732     97.863 323
+#> flipper_length_mm    18.50      2.878  6.4283 4.632e-10   12.841     24.167 323
+#> sexmale             378.98     45.265  8.3724 1.737e-15  289.926    468.028 323
+#> year                -42.78     20.953 -2.0420 4.197e-02  -84.006     -1.563 323
 #> 
-#> Residual standard error: 286.5 on 323 degrees of freedom
-#>   (11 observations deleted due to missingness)
-#> Multiple R-squared:  0.8768, Adjusted R-squared:  0.8734 
-#> F-statistic: 255.4 on 9 and 323 DF,  p-value: < 2.2e-16
+#> Multiple R-squared:  0.8768 ,    Adjusted R-squared:  0.8734 
+#> F-statistic: 298.1 on 9 and 323 DF,  p-value: < 2.2e-16
 ```
 
 Let’s say that we want to explore the effect of `flipper_length_mm` on

@@ -94,21 +94,15 @@ calculate_weights <- function(mod, term) {
     o <- list()
 
     o$term <- term
-    mdf <- stats::model.frame(wt_lm, na.action = stats::na.pass)
-    if (is_lm) {
-        n <- nrow(mdf)
+    mdf <- stats::model.frame(wt_lm)
+    has_na <- "na.action" %in% names(attributes(mdf))
+    if (has_na) {
+        na.rows <- attr(mdf, "na.action")
+        n <- nrow(mdf) + length(na.rows)
         o$weights <- rep(NA, n)
-        if (is.null(stats::na.action(wt_lm))) {
-            idx <- 1:n
-        } else {
-            idx <- (1:n)[-stats::na.action(wt_lm)]
-        }
-        o$weights[idx] <- stats::residuals(wt_lm) ^ 2
+        o$weights[-na.rows] <- (mdf[[term]] - wt_lm$fitted.values) ^ 2
     } else {
-        o$weights <- (
-            mdf[[wt_lm$outcome]] -
-            stats::predict(wt_lm)
-        ) ^ 2
+        o$weights <- (mdf[[term]] - wt_lm$fitted.values) ^ 2
     }
 
     o$weights <- o$weights / sum(o$weights, na.rm = TRUE) * sum(!is.na(o$weights))
