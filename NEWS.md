@@ -1,4 +1,4 @@
-# regweight (dev)
+# regweight 1.0.0
 
 * Added summary statistics table available as `summary.regweight`.
 

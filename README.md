@@ -8,6 +8,8 @@
 [![codecov](https://codecov.io/gh/ddimmery/regweight/branch/main/graph/badge.svg?token=OG7J5YE3JB)](https://codecov.io/gh/ddimmery/regweight)
 [![R-CMD-check](https://github.com/ddimmery/regweight/actions/workflows/check-full.yaml/badge.svg)](https://github.com/ddimmery/regweight/actions/workflows/check-full.yaml)
 [![lint](https://github.com/ddimmery/regweight/actions/workflows/lint.yaml/badge.svg)](https://github.com/ddimmery/regweight/actions/workflows/lint.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/regweight)](https://CRAN.R-project.org/package=regweight)
 <!-- badges: end -->
 
 The goal of regweight is to make it easy to diagnose a model using

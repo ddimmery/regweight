@@ -17,8 +17,9 @@ for confidence intervals.}
 \item{...}{unused arguments}
 }
 \description{
-This provides a plot showing the marginal distribution of a covariate
-under the implied regression weights and without weights.
+This provides a simple plot for the distribution of a single
+continuous covariate in the nominal sample and the implicit sample
+defined by the Aronow and Samii (2015) regression weights.
 }
 \details{
 Kernel density estimates use the bias-corrected methods of Cattaneo et al (2020).

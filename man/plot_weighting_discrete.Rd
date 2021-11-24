@@ -17,7 +17,9 @@ for confidence intervals.}
 \item{...}{unused arguments}
 }
 \description{
-This provid
+This provides a simple plot for the distribution of a single
+discrete covariate in the nominal sample and the implicit sample
+defined by the Aronow and Samii (2015) regression weights.
 }
 \examples{
 y <- rnorm(100)

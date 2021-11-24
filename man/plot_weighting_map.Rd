@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_map.R
 \name{plot_weighting_map}
 \alias{plot_weighting_map}
-\title{Plot weights in a choropleth}
+\title{Plot weights in a choropleth map}
 \usage{
 plot_weighting_map(mod, geometry, ...)
 }
@@ -15,7 +15,9 @@ each observation.}
 \item{...}{unused arguments}
 }
 \description{
-This provid
+This provides a choropleth map showing the distribution over geometries
+under the implicit sample defined by the Aronow and Samii (2015) regression
+weights.
 }
 \seealso{
 \code{\link[=hist.regweight]{hist.regweight()}}, \code{\link[=plot.regweight]{plot.regweight()}}, \code{\link[sf:sfc]{sf::sfc()}}

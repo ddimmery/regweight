@@ -1,6 +1,8 @@
-#' Plot weights in a choropleth
+#' Plot weights in a choropleth map
 #'
-#' This provid
+#' This provides a choropleth map showing the distribution over geometries
+#' under the implicit sample defined by the Aronow and Samii (2015) regression
+#' weights.
 #' @param mod Weighting model object
 #' @param geometry A column of class `sf::sfc` with the geometry associated with
 #' each observation.

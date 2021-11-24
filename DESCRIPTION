@@ -1,15 +1,17 @@
 Package: regweight
-Title: Convenience functions for Aronow and Samii (2015) regression weights
-Version: 0.0.2
+Title: Convenience Functions for Aronow and Samii (2015) Regression Weights
+Version: 1.0.0
 Authors@R: 
     person(given = "Drew",
            family = "Dimmery",
            role = c("aut", "cre"),
            email = "drew.dimmery@univie.ac.at",
            comment = c(ORCID = "0000-0001-9602-6325"))
-Description: This package provides a simple wrapper for calculating regression weights and provides 
-    easy default visualizations for these weights.
+Description: A simple wrapper for calculating regression weights. Given a model object and a term of
+    interest, 'regweight' will calculate implicit regression weights and provide a variety of useful
+    visualizations and summary statistics.
 URL: https://github.com/ddimmery/regweight https://ddimmery.github.io/regweight/
+BugReports: https://github.com/ddimmery/regweight/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -20,20 +22,20 @@ Suggests:
     CBPS,
     devtools,
     estimatr,
-    USAboundaries,
+    knitr,
+    rmarkdown,
     sf,
     testthat (>= 3.0.0),
-    knitr,
-    rmarkdown
+    USAboundaries
 Imports:
-    ggplot2,
     checkmate,
-    rlang,
     dplyr,
+    ggplot2,
     glue,
-    lpdensity,
-    scales,
     gt,
+    lpdensity,
+    rlang,
+    scales,
     tidyr,
     tidyselect
 Config/testthat/edition: 3

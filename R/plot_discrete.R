@@ -1,6 +1,8 @@
 #' Plot weights subdivided by a discrete covariate
 #'
-#' This provid
+#' This provides a simple plot for the distribution of a single
+#' discrete covariate in the nominal sample and the implicit sample
+#' defined by the Aronow and Samii (2015) regression weights.
 #' @param mod Weighting model object
 #' @param covariate Covariate vector
 #' @param alpha Number between zero and one indicating the desired alpha level
