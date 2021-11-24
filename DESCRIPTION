@@ -32,6 +32,9 @@ Imports:
     dplyr,
     glue,
     lpdensity,
-    scales
+    scales,
+    gt,
+    tidyr,
+    tidyselect
 Config/testthat/edition: 3
 VignetteBuilder: knitr

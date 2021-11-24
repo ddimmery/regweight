@@ -12,14 +12,14 @@
 #' @details 
 #' This calculates the implicit regression weights for a particular term
 #' in a given regression model.
-#' 
+#'
 #' In short, this calculates the weights for a coefficient \eqn{\beta} such that:
-#' 
+#'
 #' \deqn{\frac{\mathbb{E}[w_i \beta_i]}{\mathbb{E}[w_i]} \to \beta}
-#' 
+#'
 #' where \eqn{\beta_i} is the unit level effect. The expectation of \eqn{w_i} is the
 #' conditional variance of the variable of interest.
-#' 
+#'
 #' For details and examples, view the vignette:
 #' \code{vignette("example-usage", package = "regweight")}
 #' @references Aronow, P.M. and Samii, C. (2016), Does Regression Produce 

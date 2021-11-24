@@ -1,3 +1,7 @@
+# regweight (dev)
+
+* Added summary statistics table available as `summary.regweight`.
+
 # regweight 0.0.2
 
 * Added histogram of weights accessible with `hist`.
