@@ -26,7 +26,7 @@ in a given regression model.
 
 In short, this calculates the weights for a coefficient \eqn{\beta} such that:
 
-\deqn{\frac{\mathbb{E}[w_i \beta_i]}{\mathbb{E}[w_i]} \to \beta}
+\deqn{\frac{\mathrm{E}[w_i \beta_i]}{\mathrm{E}[w_i]} \to \beta}
 
 where \eqn{\beta_i} is the unit level effect. The expectation of \eqn{w_i} is the
 conditional variance of the variable of interest.
