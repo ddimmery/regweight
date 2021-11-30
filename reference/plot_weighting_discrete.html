@@ -42,7 +42,9 @@
 <meta property="og:title" content="Plot weights subdivided by a discrete covariate — plot_weighting_discrete" />
 <meta property="og:description" content="This provides a simple plot for the distribution of a single
 discrete covariate in the nominal sample and the implicit sample
-defined by the Aronow and Samii (2015) regression weights." />
+defined by the Aronow and Samii (2015) doi: 10.1111/ajps.12185
+
+regression weights." />
 
 <meta name="robots" content="noindex" />
 
@@ -84,7 +86,7 @@ defined by the Aronow and Samii (2015) regression weights." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">regweight</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
@@ -143,7 +145,9 @@ defined by the Aronow and Samii (2015) regression weights." />
     <div class="ref-description">
     <p>This provides a simple plot for the distribution of a single
 discrete covariate in the nominal sample and the implicit sample
-defined by the Aronow and Samii (2015) regression weights.</p>
+defined by the Aronow and Samii (2015) doi: <a href='https://doi.org/10.1111/ajps.12185'>10.1111/ajps.12185</a>
+
+regression weights.</p>
     </div>
 
     <pre class="usage"><span class='fu'>plot_weighting_discrete</span><span class='op'>(</span><span class='va'>mod</span>, <span class='va'>covariate</span>, alpha <span class='op'>=</span> <span class='fl'>0.05</span>, <span class='va'>...</span><span class='op'>)</span></pre>
@@ -170,6 +174,9 @@ for confidence intervals.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot2::ggplot</a></code> object.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span></span>

@@ -41,7 +41,9 @@
 
 <meta property="og:title" content="Create summary statistics for implicit sample — summary.regweight" />
 <meta property="og:description" content="This provides a simple table of summary statistics for
-the implicit sample defined by Aronow and Samii (2015)." />
+the implicit sample defined by Aronow and Samii (2015)
+doi: 10.1111/ajps.12185
+." />
 
 <meta name="robots" content="noindex" />
 
@@ -83,7 +85,7 @@ the implicit sample defined by Aronow and Samii (2015)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">regweight</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
@@ -141,7 +143,9 @@ the implicit sample defined by Aronow and Samii (2015)." />
 
     <div class="ref-description">
     <p>This provides a simple table of summary statistics for
-the implicit sample defined by Aronow and Samii (2015).</p>
+the implicit sample defined by Aronow and Samii (2015)
+doi: <a href='https://doi.org/10.1111/ajps.12185'>10.1111/ajps.12185</a>
+.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for regweight</span>
@@ -170,6 +174,14 @@ table for inclusion in a paper or report.</p></td>
       <td><p>unused</p></td>
     </tr>
     </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>One of three outputs depending on the requested type:</p><ul>
+<li><p><code>tibble</code>: Returns a <code>tibble</code> object (see <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code>).</p></li>
+<li><p><code>latex</code>: Returns a <code>knit_asis</code> object (see <code><a href='https://rdrr.io/pkg/knitr/man/asis_output.html'>knitr::asis_output()</a></code>).</p></li>
+<li><p><code>html</code>: Returns an <code>html</code> object (see <code><a href='https://rdrr.io/pkg/htmltools/man/HTML.html'>htmltools::HTML()</a></code>).</p></li>
+</ul>
 
 
   </div>

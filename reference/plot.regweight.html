@@ -40,7 +40,10 @@
 
 
 <meta property="og:title" content="Plot diagnostics for implicit regression weights — plot.regweight" />
-<meta property="og:description" content="This provides access to plotting functions" />
+<meta property="og:description" content="This provides access to all plotting functions and tries
+to smartly use the appropriate one based on the covariate
+provided. If covariate type is inappropriately recognized
+please use the appropriate plotting function directly." />
 
 <meta name="robots" content="noindex" />
 
@@ -82,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">regweight</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
@@ -139,7 +142,10 @@
     </div>
 
     <div class="ref-description">
-    <p>This provides access to plotting functions</p>
+    <p>This provides access to all plotting functions and tries
+to smartly use the appropriate one based on the covariate
+provided. If covariate type is inappropriately recognized
+please use the appropriate plotting function directly.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for regweight</span>
@@ -162,6 +168,9 @@
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot2::ggplot</a></code> object.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='calculate_weights.html'>calculate_weights()</a></code>, <code><a href='plot_weighting_discrete.html'>plot_weighting_discrete()</a></code>, <code><a href='plot_weighting_continuous.html'>plot_weighting_continuous()</a></code>, <code><a href='plot_weighting_map.html'>plot_weighting_map()</a></code></p></div>
