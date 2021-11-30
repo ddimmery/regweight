@@ -11,10 +11,11 @@ reference:
 - title: Estimation
 - contents:
   - calculate_weights
-- title: Plotting
+- title: Reporting
 - contents: 
   - hist.regweight
   - plot.regweight
   - plot_weighting_discrete
   - plot_weighting_continuous
   - plot_weighting_map
+  - summary.regweight

@@ -18,7 +18,16 @@ table for inclusion in a paper or report.}
 
 \item{...}{unused}
 }
+\value{
+One of three outputs depending on the requested type:
+\itemize{
+\item \code{tibble}: Returns a \code{tibble} object (see \code{\link[tibble:tibble]{tibble::tibble()}}).
+\item \code{latex}: Returns a \code{knit_asis} object (see \code{\link[knitr:asis_output]{knitr::asis_output()}}).
+\item \code{html}: Returns an \code{html} object (see \code{\link[htmltools:HTML]{htmltools::HTML()}}).
+}
+}
 \description{
 This provides a simple table of summary statistics for
-the implicit sample defined by Aronow and Samii (2015).
+the implicit sample defined by Aronow and Samii (2015)
+\doi{10.1111/ajps.12185}.
 }

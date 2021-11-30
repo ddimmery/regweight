@@ -1,12 +1,13 @@
 #' Plot weights in a choropleth map
 #'
 #' This provides a choropleth map showing the distribution over geometries
-#' under the implicit sample defined by the Aronow and Samii (2015) regression
-#' weights.
+#' under the implicit sample defined by the Aronow and Samii (2015)
+#' \doi{10.1111/ajps.12185} regression weights.
 #' @param mod Weighting model object
 #' @param geometry A column of class `sf::sfc` with the geometry associated with
 #' each observation.
 #' @param ... unused arguments
+#' @return A `ggplot2::ggplot` object.
 #' @seealso [hist.regweight()], [plot.regweight()], [sf::sfc()]
 #' @importFrom ggplot2 ggplot aes geom_line scale_x_discrete scale_y_continuous
 #' @importFrom ggplot2 scale_fill_manual scale_color_manual

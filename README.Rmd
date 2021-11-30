@@ -30,9 +30,13 @@ For more details, see `vignette("example-usage")`.
 
 ## Installation
 
-You can install the development version of regweight like so:
+You can install regweight like so:
 
-``` r
+```{r eval = FALSE}
+# From CRAN:
+install.packages("regweight")
+
+# Or the development version from GitHub:
 # install.packages("devtools")
 devtools::install_github("ddimmery/regweight")
 ```
@@ -50,7 +54,7 @@ model <- lm_robust(body_mass_g ~ ., penguins)
 summary(model)
 ```
 
-Let's say that we want to explore the effect of `flipper_length_mm` on `body_mass_g`. Which units have high implict weight in estimating this effect?
+Let's say that we want to explore the effect of `flipper_length_mm` on `body_mass_g`. Which units have high implicit weight in estimating this effect?
 
 It's very easy to use `regweight` to answer this question:
 
@@ -68,4 +72,14 @@ We can similarly see the implicit distribution of `bill_length_mm` in the nomina
 
 ```{r cts}
 plot(rw_model, penguins$bill_length_mm)
+```
+
+Or get a table of summary statistics:
+
+```{r summ}
+summary(
+  rw_model,
+  dplyr::select(penguins, island, bill_length_mm),
+  output = "html"
+)
 ```

@@ -1,9 +1,13 @@
 #' Plot diagnostics for implicit regression weights
 #'
-#' This provides access to plotting functions
+#' This provides access to all plotting functions and tries
+#' to smartly use the appropriate one based on the covariate
+#' provided. If covariate type is inappropriately recognized
+#' please use the appropriate plotting function directly.
 #' @param x Weighting model object
 #' @param covariate Covariate vector
 #' @param ... additional arguments passed to individual plotting functions
+#' @return A `ggplot2::ggplot` object.
 #' @seealso [calculate_weights()], [plot_weighting_discrete()], [plot_weighting_continuous()], [plot_weighting_map()]
 #' @importFrom ggplot2 ggplot aes geom_pointrange geom_point
 #' @importFrom dplyr tibble group_by summarize mutate n

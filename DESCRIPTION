@@ -1,13 +1,14 @@
 Package: regweight
-Title: Convenience Functions for Aronow and Samii (2015) Regression Weights
-Version: 1.0.0
+Title: Convenience Functions for Implicit Regression Weights
+Version: 1.0.1
 Authors@R: 
     person(given = "Drew",
            family = "Dimmery",
            role = c("aut", "cre"),
            email = "drew.dimmery@univie.ac.at",
            comment = c(ORCID = "0000-0001-9602-6325"))
-Description: A simple wrapper for calculating regression weights. Given a model object and a term of
+Description: A simple wrapper for calculating regression weights as defined by Aronow and 
+    Samii (2015) <doi:10.1111/ajps.12185>. Given a model object and a term of
     interest, 'regweight' will calculate implicit regression weights and provide a variety of useful
     visualizations and summary statistics.
 URL: https://github.com/ddimmery/regweight https://ddimmery.github.io/regweight/

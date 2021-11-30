@@ -1,3 +1,9 @@
+# regweight 1.0.1
+
+* Added documentation to comply with CRAN policies.
+
+* Included summary statistics table in vignette.
+
 # regweight 1.0.0
 
 * Added summary statistics table available as `summary.regweight`.

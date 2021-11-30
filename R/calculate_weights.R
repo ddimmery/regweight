@@ -1,14 +1,21 @@
 #' Calculate regression weights
 #'
 #' Given a model and a term of interest, calculate
-#' the Aronow and Samii (2015) regression weights and return
-#' an object which can be used to diagnose these implicit
-#' weights.
+#' the Aronow and Samii (2015) \doi{10.1111/ajps.12185} regression
+#' weights and return an object which can be used to diagnose these
+#' implicit weights.
 #' @param mod The linear model object from `lm` or `lm_robust`.
 #' @param term String indicating the term for which
 #' to calculate the implicit regression weights. This must uniquely match
 #' a coefficient name (i.e. it must be a string which appears in only one
 #' element of `coef(mod)`).
+#' @return An object of class `regweight` containing:\tabular{ll}{
+#' \code{term} \tab The term in the regression for which weights were calculated. \cr
+#' \tab \cr
+#' \code{model} \tab The partial regression model object. \cr
+#' \tab \cr
+#' \code{weights} \tab The implicit regression weights. \cr
+#' }
 #' @details
 #' This calculates the implicit regression weights for a particular term
 #' in a given regression model.
@@ -22,15 +29,15 @@
 #'
 #' For details and examples, view the vignette:
 #' \code{vignette("example-usage", package = "regweight")}
-#' @references Aronow, P.M. and Samii, C. (2016), Does Regression Produce
-#' Representative Estimates of Causal Effects?. *American Journal of Political
-#' Science*, 60: 250-267. https://doi.org/10.1111/ajps.12185
+#' @references Aronow, P.M. and Samii, C. (2016), "Does Regression Produce
+#' Representative Estimates of Causal Effects?". *American Journal of Political
+#' Science*, 60: 250-267. \doi{10.1111/ajps.12185}
 #' @examples
 #' y <- rnorm(100)
 #' a <- rbinom(100, 1, 0.5)
 #' x <- rnorm(100)
 #' m1 <- stats::lm(y ~ a + x)
-#' 
+#'
 #' w1 <- calculate_weights(m1, "a")
 #' @importFrom checkmate test_class test_character
 #' @importFrom rlang abort
@@ -106,6 +113,7 @@ calculate_weights <- function(mod, term) {
     }
 
     o$weights <- o$weights / sum(o$weights, na.rm = TRUE) * sum(!is.na(o$weights))
+    o$model <- wt_lm
 
     names(o$weights) <- NULL
 

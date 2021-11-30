@@ -1,7 +1,8 @@
 #' Create summary statistics for implicit sample
 #'
 #' This provides a simple table of summary statistics for
-#' the implicit sample defined by Aronow and Samii (2015).
+#' the implicit sample defined by Aronow and Samii (2015)
+#' \doi{10.1111/ajps.12185}.
 #'
 #' @param object Weighting model object
 #' @param df dataframe with one column for each covariate to
@@ -10,6 +11,12 @@
 #' but can also select from "latex" and "html" to return a formatted
 #' table for inclusion in a paper or report.
 #' @param ... unused
+#' @return One of three outputs depending on the requested type:
+#' \itemize{
+#'   \item \code{tibble}: Returns a `tibble` object (see [tibble::tibble()]).
+#'   \item \code{latex}: Returns a `knit_asis` object (see [knitr::asis_output()]).
+#'   \item \code{html}: Returns an `html` object (see [htmltools::HTML()]).
+#' }
 #' @importFrom ggplot2 ggplot aes geom_histogram theme_minimal
 #' @importFrom ggplot2 scale_x_log10 expand_limits
 #' @importFrom dplyr %>% group_by summarize mutate n
@@ -96,6 +103,7 @@ summary.regweight <- function(object, df, output = "tibble", ...) {
     format_result(result_discrete, result_cts, type = output)
 }
 
+#' @noRd
 #' @importFrom gt gt
 format_result <- function(tbl_discrete, tbl_cts, type) {
     if (type == "tibble") {
@@ -174,17 +182,18 @@ format_result <- function(tbl_discrete, tbl_cts, type) {
 
 }
 
+#' @noRd
 summary_of_discrete <- function(df) {
     df %>%
         dplyr::group_by(.data$value) %>%
         dplyr::summarize(
             n = n(),
-            weight = sum(.data$.weight)
+            sum_weight = sum(.data$.weight, na.rm = TRUE)
         ) %>%
         dplyr::ungroup() %>%
         dplyr::mutate(
             unweighted = .data$n / sum(.data$n),
-            weighted = .data$weight / sum(.data$weight)
+            weighted = .data$sum_weight / sum(.data$sum_weight, na.rm = TRUE)
         ) %>%
         dplyr::group_by(.data$value) %>%
         dplyr::summarize(
@@ -197,6 +206,7 @@ summary_of_discrete <- function(df) {
         )
 }
 
+#' @noRd
 #' @importFrom stats weighted.mean sd
 summary_of_continuous <- function(df) {
     df %>%
@@ -205,20 +215,25 @@ summary_of_continuous <- function(df) {
             sample = c("Nominal", "Implicit"),
             mean = c(
                 mean(.data$value, na.rm = TRUE),
-                stats::weighted.mean(.data$value, .data$.weight, na.rm = TRUE)
+                stats::weighted.mean(
+                    .data$value[!is.na(.data$.weight)],
+                    .data$.weight[!is.na(.data$.weight)],
+                    na.rm = TRUE
+                )
             ),
             std_dev = c(
                 stats::sd(.data$value, na.rm = TRUE),
                 sqrt(stats::weighted.mean(
                     (
-                        .data$value -
+                        .data$value[!is.na(.data$.weight)] -
                         stats::weighted.mean(
-                            .data$value,
-                            .data$.weight,
+                            .data$value[!is.na(.data$.weight)],
+                            .data$.weight[!is.na(.data$.weight)],
                             na.rm = TRUE
                         )
                     ) ^ 2,
-                    .data$.weight
+                    .data$.weight[!is.na(.data$.weight)],
+                    na.rm = TRUE
                 ))
             ),
             value = c(NA, NA),

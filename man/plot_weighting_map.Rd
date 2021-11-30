@@ -14,10 +14,13 @@ each observation.}
 
 \item{...}{unused arguments}
 }
+\value{
+A \code{ggplot2::ggplot} object.
+}
 \description{
 This provides a choropleth map showing the distribution over geometries
-under the implicit sample defined by the Aronow and Samii (2015) regression
-weights.
+under the implicit sample defined by the Aronow and Samii (2015)
+\doi{10.1111/ajps.12185} regression weights.
 }
 \seealso{
 \code{\link[=hist.regweight]{hist.regweight()}}, \code{\link[=plot.regweight]{plot.regweight()}}, \code{\link[sf:sfc]{sf::sfc()}}

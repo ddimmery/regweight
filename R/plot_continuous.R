@@ -2,14 +2,16 @@
 #'
 #' This provides a simple plot for the distribution of a single
 #' continuous covariate in the nominal sample and the implicit sample
-#' defined by the Aronow and Samii (2015) regression weights.
+#' defined by the Aronow and Samii (2015) \doi{10.1111/ajps.12185} regression
+#' weights.
 #' @param mod Weighting model object
 #' @param covariate Covariate vector
 #' @param alpha Number between zero and one indicating the desired alpha level
 #' for confidence intervals.
 #' @param ... unused arguments
-#' @details 
+#' @details
 #' Kernel density estimates use the bias-corrected methods of Cattaneo et al (2020).
+#' @return A `ggplot2::ggplot` object.
 #' @examples
 #' y <- rnorm(100)
 #' a <- rbinom(100, 1, 0.5)

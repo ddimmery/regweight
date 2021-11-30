@@ -13,8 +13,14 @@
 
 \item{...}{additional arguments passed to individual plotting functions}
 }
+\value{
+A \code{ggplot2::ggplot} object.
+}
 \description{
-This provides access to plotting functions
+This provides access to all plotting functions and tries
+to smartly use the appropriate one based on the covariate
+provided. If covariate type is inappropriately recognized
+please use the appropriate plotting function directly.
 }
 \seealso{
 \code{\link[=calculate_weights]{calculate_weights()}}, \code{\link[=plot_weighting_discrete]{plot_weighting_discrete()}}, \code{\link[=plot_weighting_continuous]{plot_weighting_continuous()}}, \code{\link[=plot_weighting_map]{plot_weighting_map()}}

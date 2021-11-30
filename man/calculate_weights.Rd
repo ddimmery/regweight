@@ -14,11 +14,20 @@ to calculate the implicit regression weights. This must uniquely match
 a coefficient name (i.e. it must be a string which appears in only one
 element of \code{coef(mod)}).}
 }
+\value{
+An object of class \code{regweight} containing:\tabular{ll}{
+\code{term} \tab The term in the regression for which weights were calculated. \cr
+\tab \cr
+\code{model} \tab The partial regression model object. \cr
+\tab \cr
+\code{weights} \tab The implicit regression weights. \cr
+}
+}
 \description{
 Given a model and a term of interest, calculate
-the Aronow and Samii (2015) regression weights and return
-an object which can be used to diagnose these implicit
-weights.
+the Aronow and Samii (2015) \doi{10.1111/ajps.12185} regression
+weights and return an object which can be used to diagnose these
+implicit weights.
 }
 \details{
 This calculates the implicit regression weights for a particular term
@@ -43,7 +52,7 @@ m1 <- stats::lm(y ~ a + x)
 w1 <- calculate_weights(m1, "a")
 }
 \references{
-Aronow, P.M. and Samii, C. (2016), Does Regression Produce
-Representative Estimates of Causal Effects?. \emph{American Journal of Political
-Science}, 60: 250-267. https://doi.org/10.1111/ajps.12185
+Aronow, P.M. and Samii, C. (2016), "Does Regression Produce
+Representative Estimates of Causal Effects?". \emph{American Journal of Political
+Science}, 60: 250-267. \doi{10.1111/ajps.12185}
 }

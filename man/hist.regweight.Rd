@@ -14,7 +14,10 @@ Freedman-Diaconis rule will be used.}
 
 \item{...}{unused arguments}
 }
+\value{
+A \code{ggplot2::ggplot} object.
+}
 \description{
 This provides a simple histogram of the Aronow and Samii (2015)
-implicit regression weights.
+\doi{10.1111/ajps.12185} implicit regression weights.
 }

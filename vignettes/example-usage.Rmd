@@ -121,3 +121,15 @@ df$geometry <- sample(state_shapes$geometry, nrow(df), replace = TRUE, prob = pr
 
 plot(rw_mod, df$geometry)
 ```
+
+# Summary table
+
+It's also easy to include a table of summary statistics for the nominal and implicit samples across a variety of covariates:
+
+```{r}
+summary(
+  rw_mod,
+  df %>% select(re74, re74.miss, age, married, nodegr),
+  output = "html"
+)
+```
