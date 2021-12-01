@@ -29,6 +29,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -41,40 +43,22 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">regweight</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li>
   <a href="news/index.html">Changelog</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="articles/example-usage.html">Example Usage</a>
-    </li>
-  </ul>
-</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ddimmery/regweight/">
+  <a href="https://github.com/ddimmery/regweight/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -91,37 +75,37 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="regweight" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#regweight" class="anchor"></a>regweight</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="regweight">regweight<a class="anchor" aria-label="anchor" href="#regweight"></a>
+</h1></div>
 <!-- badges: start -->
 
-<p>The goal of regweight is to make it easy to diagnose a model using <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/ajps.12185">Aronow and Samii (2015)</a> regression weights.</p>
+<p>The goal of regweight is to make it easy to diagnose a model using <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/ajps.12185" class="external-link">Aronow and Samii (2015)</a> regression weights.</p>
 <p>In short, these weights show which observations are most influential for determining the observed value of a coefficient in a linear regression. If the linear regression is aiming to estimate causal effects, this implies that the OLS <em>estimand</em> may differ from the average treatment effect. These linear regression weights provide, in some sense, the most precise estimate available given a conditioning set (and a linear model). These weights are in expectation the conditional variance of the variable of interest (given the other covariates in the model).</p>
 <p>For more details, see <code><a href="articles/example-usage.html">vignette("example-usage")</a></code>.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>You can install regweight like so:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># From CRAN:</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"regweight"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"regweight"</span><span class="op">)</span>
 
 <span class="co"># Or the development version from GitHub:</span>
 <span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"ddimmery/regweight"</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ddimmery/regweight"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
 <p>This is a basic example which shows you how to analyze the implicit regression weights in a simple problem:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddimmery/regweight">regweight</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://declaredesign.org/r/estimatr/">estimatr</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">penguins</span>, package <span class="op">=</span> <span class="st">"palmerpenguins"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddimmery/regweight" class="external-link">regweight</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://declaredesign.org/r/estimatr/" class="external-link">estimatr</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">penguins</span>, package <span class="op">=</span> <span class="st">"palmerpenguins"</span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://declaredesign.org/r/estimatr/reference/lm_robust.html">lm_robust</a></span><span class="op">(</span><span class="va">body_mass_g</span> <span class="op">~</span> <span class="va">.</span>, <span class="va">penguins</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://declaredesign.org/r/estimatr/reference/lm_robust.html" class="external-link">lm_robust</a></span><span class="op">(</span><span class="va">body_mass_g</span> <span class="op">~</span> <span class="va">.</span>, <span class="va">penguins</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
 <span class="co">#&gt; lm_robust(formula = body_mass_g ~ ., data = penguins)</span>
@@ -147,25 +131,25 @@
 <p>It’s very easy to use <code>regweight</code> to answer this question:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rw_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/calculate_weights.html">calculate_weights</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"flipper_length_mm"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">rw_model</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">rw_model</span><span class="op">)</span>
 <span class="co">#&gt; Warning: Removed 11 rows containing non-finite values (stat_bin).</span></code></pre></div>
 <p><img src="reference/figures/README-regweight-1.png" width="100%"></p>
 <p>We can see how the distribution of weights over islands varies:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">rw_model</span>, <span class="va">penguins</span><span class="op">$</span><span class="va">island</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rw_model</span>, <span class="va">penguins</span><span class="op">$</span><span class="va">island</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-discrete-1.png" width="100%"></p>
 <p>We can similarly see the implicit distribution of <code>bill_length_mm</code> in the nominal (unweighted) and implicit (regression weighted) sample:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">rw_model</span>, <span class="va">penguins</span><span class="op">$</span><span class="va">bill_length_mm</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rw_model</span>, <span class="va">penguins</span><span class="op">$</span><span class="va">bill_length_mm</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-cts-1.png" width="100%"></p>
 <p>Or get a table of summary statistics:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>
   <span class="va">rw_model</span>,
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="va">island</span>, <span class="va">bill_length_mm</span><span class="op">)</span>,
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="va">island</span>, <span class="va">bill_length_mm</span><span class="op">)</span>,
   output <span class="op">=</span> <span class="st">"html"</span>
 <span class="op">)</span></code></pre></div>
-<table class="table">
+<table style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif; display: table; border-collapse: collapse; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" class="table">
 <thead style="border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
 <tr>
 <th style="color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: left;" rowspan="2" colspan="1">
@@ -286,47 +270,59 @@ bill_length_mm
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/ddimmery/regweight/">https://​github.com/​ddimmery/​regweight/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/ddimmery/regweight/issues">https://​github.com/​ddimmery/​regweight/​issues</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Drew Dimmery <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-9602-6325" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="https://cloud.r-project.org/package=regweight" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/ddimmery/regweight/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/ddimmery/regweight/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://app.codecov.io/gh/ddimmery/regweight"><img src="https://codecov.io/gh/ddimmery/regweight/branch/main/graph/badge.svg?token=OG7J5YE3JB" alt="codecov"></a></li>
-<li><a href="https://github.com/ddimmery/regweight/actions/workflows/check-full.yaml"><img src="https://github.com/ddimmery/regweight/actions/workflows/check-full.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://github.com/ddimmery/regweight/actions/workflows/lint.yaml"><img src="https://github.com/ddimmery/regweight/actions/workflows/lint.yaml/badge.svg" alt="lint"></a></li>
-<li><a href="https://CRAN.R-project.org/package=regweight"><img src="https://www.r-pkg.org/badges/version/regweight" alt="CRAN status"></a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing regweight</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Drew Dimmery <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-9602-6325" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://app.codecov.io/gh/ddimmery/regweight" class="external-link"><img src="https://codecov.io/gh/ddimmery/regweight/branch/main/graph/badge.svg?token=OG7J5YE3JB" alt="codecov"></a></li>
+<li><a href="https://github.com/ddimmery/regweight/actions/workflows/check-full.yaml" class="external-link"><img src="https://github.com/ddimmery/regweight/actions/workflows/check-full.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/ddimmery/regweight/actions/workflows/lint.yaml" class="external-link"><img src="https://github.com/ddimmery/regweight/actions/workflows/lint.yaml/badge.svg" alt="lint"></a></li>
+<li><a href="https://CRAN.R-project.org/package=regweight" class="external-link"><img src="https://www.r-pkg.org/badges/version/regweight" alt="CRAN status"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Drew Dimmery.</p>
+  <p></p>
+<p>Developed by Drew Dimmery.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
 </div>
 
       </footer>
@@ -334,6 +330,8 @@ bill_length_mm
 
   
 
+
+  
 
   </body>
 </html>
