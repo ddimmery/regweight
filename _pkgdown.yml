@@ -2,10 +2,9 @@ template:
   params:
     ganalytics: G-ZGP7W3HFCK
     bootswatch: yeti
-    noindex: true
 navbar:
   structure:
-    left:  [home, reference, tutorials, news]
+    left:  [home, reference, articles, news]
     right: [github]
 reference:
 - title: Estimation

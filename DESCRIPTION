@@ -1,6 +1,6 @@
 Package: regweight
 Title: Convenience Functions for Implicit Regression Weights
-Version: 1.0.1
+Version: 1.0.1.9000
 Authors@R: 
     person(given = "Drew",
            family = "Dimmery",

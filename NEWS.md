@@ -1,3 +1,9 @@
+# regweight (dev)
+
+* Fix typos in vignette
+
+* Update pkgdown website.
+
 # regweight 1.0.1
 
 * Added documentation to comply with CRAN policies.

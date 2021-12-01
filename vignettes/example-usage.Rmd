@@ -49,7 +49,7 @@ $$
 
 Implicit regression weights are then just the squared residuals of this regression.
 
-The intuition of this is all simply to show that a coefficient in OLS will, in general, be the up-weighted when it's harder to explain from the other covariates in the model. If a unit's $A_i$ is very easy to predict, then it will not figure prominently in the OLS estimate of the effect.
+The intuition of this is that a unit-specific coefficient in OLS will, in general, be up-weighted when it's harder to explain that variable's value from the other covariates in the model. If a unit's $A_i$ is very easy to predict, then it will not figure prominently in the aggregate OLS estimate of the effect.
 
 This is distinct from more conventional regression diagnostics like leverage, because those focus on how the entire vector of coefficients change. Most analysts, however, have specific hypotheses on specific coefficients, however, so the implicit regression weights demonstrate, essentially, the term-specific leverage.
 
@@ -106,6 +106,18 @@ plot(rw_mod, df$age) + scale_x_continuous("Age")
 plot(rw_mod, df$re74) + scale_x_continuous("Income (1974)")
 ```
 
+# Summary table
+
+It's also easy to include a table of summary statistics for the nominal and implicit samples across a variety of covariates:
+
+```{r}
+summary(
+  rw_mod,
+  df %>% select(re74, re74.miss, age, married, nodegr),
+  output = "html"
+)
+```
+
 # Mapping
 
 For the sake of example, let's imagine that we had geographical information on each unit, as well. Geometries/shapes should be specified in `sf::sfc` format.
@@ -120,16 +132,4 @@ pr_state <- pr_state / sum(pr_state)
 df$geometry <- sample(state_shapes$geometry, nrow(df), replace = TRUE, prob = pr_state)
 
 plot(rw_mod, df$geometry)
-```
-
-# Summary table
-
-It's also easy to include a table of summary statistics for the nominal and implicit samples across a variety of covariates:
-
-```{r}
-summary(
-  rw_mod,
-  df %>% select(re74, re74.miss, age, married, nodegr),
-  output = "html"
-)
 ```
