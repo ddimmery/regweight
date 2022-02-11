@@ -56,7 +56,10 @@ jobs:
 
       - name: "[Custom block] [Linux] Install spatial libraries"
         if: runner.os == 'Linux'
-        run: sudo apt-get install libgdal-dev libproj-dev libgeos-dev libudunits2-dev
+        run: |
+          sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
+          sudo apt-get update
+          sudo apt-get install libgdal-dev libproj-dev libgeos-dev libudunits2-dev
 
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
