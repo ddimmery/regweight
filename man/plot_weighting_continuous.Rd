@@ -4,7 +4,7 @@
 \alias{plot_weighting_continuous}
 \title{Plot weights across a continuous covariate}
 \usage{
-plot_weighting_continuous(mod, covariate, alpha = 0.05, ...)
+plot_weighting_continuous(mod, covariate, alpha = 0.05, num_eval = 250, ...)
 }
 \arguments{
 \item{mod}{Weighting model object}
@@ -13,6 +13,8 @@ plot_weighting_continuous(mod, covariate, alpha = 0.05, ...)
 
 \item{alpha}{Number between zero and one indicating the desired alpha level
 for confidence intervals.}
+
+\item{num_eval}{Number of points at which to evaluate the density.}
 
 \item{...}{unused arguments}
 }
@@ -35,7 +37,7 @@ x <- rnorm(100)
 cov <- runif(100)
 mod <- stats::lm(y ~ a + x)
 rw_mod <- calculate_weights(mod, "a")
-plot_weighting_continuous(rw_mod, cov)
+plot_weighting_continuous(rw_mod, cov, num_eval = 25)
 }
 \references{
 \itemize{

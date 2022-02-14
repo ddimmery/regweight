@@ -1,8 +1,10 @@
-# regweight (dev)
+# regweight 1.0.2
 
 * Fix typos in vignette
 
 * Update pkgdown website.
+
+* Fix problems in CRAN checks.
 
 # regweight 1.0.1
 

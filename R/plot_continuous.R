@@ -8,6 +8,7 @@
 #' @param covariate Covariate vector
 #' @param alpha Number between zero and one indicating the desired alpha level
 #' for confidence intervals.
+#' @param num_eval Number of points at which to evaluate the density.
 #' @param ... unused arguments
 #' @details
 #' Kernel density estimates use the bias-corrected methods of Cattaneo et al (2020).
@@ -19,7 +20,7 @@
 #' cov <- runif(100)
 #' mod <- stats::lm(y ~ a + x)
 #' rw_mod <- calculate_weights(mod, "a")
-#' plot_weighting_continuous(rw_mod, cov)
+#' plot_weighting_continuous(rw_mod, cov, num_eval = 25)
 #' @seealso [lpdensity::lpdensity()]
 #' @references \itemize{
 #'  \item Cattaneo, Jansson and Ma (2021): lpdensity: Local Polynomial Density Estimation and Inference. 
@@ -35,7 +36,7 @@
 #' @importFrom lpdensity lpdensity
 #' @importFrom dplyr tibble %>%
 #' @export
-plot_weighting_continuous <- function(mod, covariate, alpha = 0.05, ...) {
+plot_weighting_continuous <- function(mod, covariate, alpha = 0.05, num_eval = 250, ...) {
     checkmate::assert_class(mod, "regweight")
     checkmate::assert_numeric(covariate)
 
@@ -45,7 +46,7 @@ plot_weighting_continuous <- function(mod, covariate, alpha = 0.05, ...) {
     wts <- mod$weights[ok]
 
     range <- stats::quantile(covariate, probs = c(0.05, 0.95))
-    eval_pts <- seq(range[1], range[2], length = 250)
+    eval_pts <- seq(range[1], range[2], length = num_eval)
 
     wkde <- lpdensity::lpdensity(
         covariate,
@@ -63,8 +64,8 @@ plot_weighting_continuous <- function(mod, covariate, alpha = 0.05, ...) {
     )
 
     tbl <- dplyr::tibble(
-        weight = rep(c("Implicit regression", "Nominal"), c(250, 250)),
-        transp = rep(c(1, 0.5), c(250, 250)),
+        weight = rep(c("Implicit regression", "Nominal"), c(num_eval, num_eval)),
+        transp = rep(c(1, 0.5), c(num_eval, num_eval)),
         covariate = c(eval_pts, eval_pts),
         density = c(wkde$Estimate[, "f_p"], kde$Estimate[, "f_p"]),
         std_error = c(wkde$Estimate[, "se_q"], kde$Estimate[, "se_q"]),
