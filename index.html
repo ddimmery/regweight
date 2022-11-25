@@ -52,7 +52,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -99,67 +99,67 @@
 </h2>
 <p>You can install regweight like so:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># From CRAN:</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"regweight"</span><span class="op">)</span>
-
-<span class="co"># Or the development version from GitHub:</span>
-<span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ddimmery/regweight"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># From CRAN:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"regweight"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Or the development version from GitHub:</span></span>
+<span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ddimmery/regweight"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>This is a basic example which shows you how to analyze the implicit regression weights in a simple problem:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddimmery/regweight" class="external-link">regweight</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://declaredesign.org/r/estimatr/" class="external-link">estimatr</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">penguins</span>, package <span class="op">=</span> <span class="st">"palmerpenguins"</span><span class="op">)</span>
-
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://declaredesign.org/r/estimatr/reference/lm_robust.html" class="external-link">lm_robust</a></span><span class="op">(</span><span class="va">body_mass_g</span> <span class="op">~</span> <span class="va">.</span>, <span class="va">penguins</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm_robust(formula = body_mass_g ~ ., data = penguins)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Standard error type:  HC2 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;                   Estimate Std. Error t value  Pr(&gt;|t|) CI Lower   CI Upper  DF</span>
-<span class="co">#&gt; (Intercept)       84087.94  41946.611  2.0046 4.584e-02 1564.884 166611.005 323</span>
-<span class="co">#&gt; speciesChinstrap   -282.54     79.288 -3.5635 4.212e-04 -438.525   -126.554 323</span>
-<span class="co">#&gt; speciesGentoo       890.96    132.512  6.7236 8.048e-11  630.263   1151.653 323</span>
-<span class="co">#&gt; islandDream         -21.18     56.015 -0.3781 7.056e-01 -131.380     89.019 323</span>
-<span class="co">#&gt; islandTorgersen     -58.78     63.182 -0.9303 3.529e-01 -183.078     65.524 323</span>
-<span class="co">#&gt; bill_length_mm       18.96      6.214  3.0516 2.465e-03    6.738     31.190 323</span>
-<span class="co">#&gt; bill_depth_mm        60.80     18.841  3.2270 1.379e-03   23.732     97.863 323</span>
-<span class="co">#&gt; flipper_length_mm    18.50      2.878  6.4283 4.632e-10   12.841     24.167 323</span>
-<span class="co">#&gt; sexmale             378.98     45.265  8.3724 1.737e-15  289.926    468.028 323</span>
-<span class="co">#&gt; year                -42.78     20.953 -2.0420 4.197e-02  -84.006     -1.563 323</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Multiple R-squared:  0.8768 ,    Adjusted R-squared:  0.8734 </span>
-<span class="co">#&gt; F-statistic: 298.1 on 9 and 323 DF,  p-value: &lt; 2.2e-16</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddimmery/regweight" class="external-link">regweight</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://declaredesign.org/r/estimatr/" class="external-link">estimatr</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">penguins</span>, package <span class="op">=</span> <span class="st">"palmerpenguins"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://declaredesign.org/r/estimatr/reference/lm_robust.html" class="external-link">lm_robust</a></span><span class="op">(</span><span class="va">body_mass_g</span> <span class="op">~</span> <span class="va">.</span>, <span class="va">penguins</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; lm_robust(formula = body_mass_g ~ ., data = penguins)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Standard error type:  HC2 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;                   Estimate Std. Error t value  Pr(&gt;|t|) CI Lower   CI Upper  DF</span></span>
+<span><span class="co">#&gt; (Intercept)       84087.94  41946.611  2.0046 4.584e-02 1564.884 166611.005 323</span></span>
+<span><span class="co">#&gt; speciesChinstrap   -282.54     79.288 -3.5635 4.212e-04 -438.525   -126.554 323</span></span>
+<span><span class="co">#&gt; speciesGentoo       890.96    132.512  6.7236 8.048e-11  630.263   1151.653 323</span></span>
+<span><span class="co">#&gt; islandDream         -21.18     56.015 -0.3781 7.056e-01 -131.380     89.019 323</span></span>
+<span><span class="co">#&gt; islandTorgersen     -58.78     63.182 -0.9303 3.529e-01 -183.078     65.524 323</span></span>
+<span><span class="co">#&gt; bill_length_mm       18.96      6.214  3.0516 2.465e-03    6.738     31.190 323</span></span>
+<span><span class="co">#&gt; bill_depth_mm        60.80     18.841  3.2270 1.379e-03   23.732     97.863 323</span></span>
+<span><span class="co">#&gt; flipper_length_mm    18.50      2.878  6.4283 4.632e-10   12.841     24.167 323</span></span>
+<span><span class="co">#&gt; sexmale             378.98     45.265  8.3724 1.737e-15  289.926    468.028 323</span></span>
+<span><span class="co">#&gt; year                -42.78     20.953 -2.0420 4.197e-02  -84.006     -1.563 323</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Multiple R-squared:  0.8768 ,    Adjusted R-squared:  0.8734 </span></span>
+<span><span class="co">#&gt; F-statistic: 298.1 on 9 and 323 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
 <p>Let’s say that we want to explore the effect of <code>flipper_length_mm</code> on <code>body_mass_g</code>. Which units have high implicit weight in estimating this effect?</p>
 <p>It’s very easy to use <code>regweight</code> to answer this question:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">rw_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/calculate_weights.html">calculate_weights</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"flipper_length_mm"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">rw_model</span><span class="op">)</span>
-<span class="co">#&gt; Warning: Removed 11 rows containing non-finite values (stat_bin).</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">rw_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/calculate_weights.html">calculate_weights</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"flipper_length_mm"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">rw_model</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Removed 11 rows containing non-finite values (stat_bin).</span></span></code></pre></div>
 <p><img src="reference/figures/README-regweight-1.png" width="100%"></p>
 <p>We can see how the distribution of weights over islands varies:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rw_model</span>, <span class="va">penguins</span><span class="op">$</span><span class="va">island</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rw_model</span>, <span class="va">penguins</span><span class="op">$</span><span class="va">island</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-discrete-1.png" width="100%"></p>
 <p>We can similarly see the implicit distribution of <code>bill_length_mm</code> in the nominal (unweighted) and implicit (regression weighted) sample:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rw_model</span>, <span class="va">penguins</span><span class="op">$</span><span class="va">bill_length_mm</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rw_model</span>, <span class="va">penguins</span><span class="op">$</span><span class="va">bill_length_mm</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-cts-1.png" width="100%"></p>
 <p>Or get a table of summary statistics:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>
-  <span class="va">rw_model</span>,
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="va">island</span>, <span class="va">bill_length_mm</span><span class="op">)</span>,
-  output <span class="op">=</span> <span class="st">"html"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span></span>
+<span>  <span class="va">rw_model</span>,</span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="va">island</span>, <span class="va">bill_length_mm</span><span class="op">)</span>,</span>
+<span>  output <span class="op">=</span> <span class="st">"html"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <table style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif; display: table; border-collapse: collapse; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" class="table">
 <thead style="border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
 <tr>
@@ -192,7 +192,7 @@ Std. Dev.
 </tr>
 </thead>
 <tbody style="border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3;">
-<tr style="">
+<tr style>
 <td colspan="6" style="padding: 8px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle;">
 Discrete variables
 </td>
@@ -249,7 +249,7 @@ Torgersen
 <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: right; font-variant-numeric: tabular-nums;">
 </td>
 </tr>
-<tr style="">
+<tr style>
 <td colspan="6" style="padding: 8px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle;">
 Continuous variables
 </td>
@@ -333,7 +333,7 @@ bill_length_mm
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
