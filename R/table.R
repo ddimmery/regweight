@@ -14,7 +14,8 @@
 #' @return One of three outputs depending on the requested type:
 #' \itemize{
 #'   \item \code{tibble}: Returns a `tibble` object (see [tibble::tibble()]).
-#'   \item \code{latex}: Returns a `knit_asis` object (see [knitr::asis_output()]).
+#'   \item \code{latex}: Returns a `knit_asis` object
+#' (see [knitr::asis_output()]).
 #'   \item \code{html}: Returns an `html` object (see [htmltools::HTML()]).
 #' }
 #' @importFrom ggplot2 ggplot aes geom_histogram theme_minimal

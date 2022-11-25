@@ -16,7 +16,11 @@
 hist.regweight <- function(x, bw = NULL, ...) {
     if (is.null(bw)) {
         # Freedman-Diaconis rule
-        bw <- 2 * stats::IQR(x$weights, na.rm = TRUE) / sum(!is.na(x$weights)) ^ (1 / 3)
+        bw <- (
+            2 * stats::IQR(x$weights, na.rm = TRUE)
+            /
+            sum(!is.na(x$weights)) ^ (1 / 3)
+        )
     }
     ggplot2::ggplot(dplyr::tibble(w = x$weights), ggplot2::aes(w)) +
     ggplot2::geom_histogram(binwidth = bw) +

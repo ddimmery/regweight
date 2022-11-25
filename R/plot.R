@@ -8,7 +8,8 @@
 #' @param covariate Covariate vector
 #' @param ... additional arguments passed to individual plotting functions
 #' @return A `ggplot2::ggplot` object.
-#' @seealso [calculate_weights()], [plot_weighting_discrete()], [plot_weighting_continuous()], [plot_weighting_map()]
+#' @seealso [calculate_weights()], [plot_weighting_discrete()],
+#' [plot_weighting_continuous()], [plot_weighting_map()]
 #' @importFrom ggplot2 ggplot aes geom_pointrange geom_point
 #' @importFrom dplyr tibble group_by summarize mutate n
 #' @importFrom checkmate test_character

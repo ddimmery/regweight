@@ -1,6 +1,6 @@
 test_that("s3 plotting works", {
     set.seed(100)
-    
+
     y <- rnorm(100)
     a <- rbinom(100, 1, 0.5)
     x <- rnorm(100)

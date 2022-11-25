@@ -10,7 +10,7 @@
 #' a coefficient name (i.e. it must be a string which appears in only one
 #' element of `coef(mod)`).
 #' @return An object of class `regweight` containing:\tabular{ll}{
-#' \code{term} \tab The term in the regression for which weights were calculated. \cr
+#' \code{term} \tab Term for which weights were calculated. \cr
 #' \tab \cr
 #' \code{model} \tab The partial regression model object. \cr
 #' \tab \cr
@@ -20,12 +20,13 @@
 #' This calculates the implicit regression weights for a particular term
 #' in a given regression model.
 #'
-#' In short, this calculates the weights for a coefficient \eqn{\beta} such that:
+#' In short, this calculates the weights for a coefficient \eqn{\beta} such
+#' that:
 #'
 #' \deqn{\frac{\mathrm{E}[w_i \beta_i]}{\mathrm{E}[w_i]} \to \beta}
 #'
-#' where \eqn{\beta_i} is the unit level effect. The expectation of \eqn{w_i} is the
-#' conditional variance of the variable of interest.
+#' where \eqn{\beta_i} is the unit level effect. The expectation of \eqn{w_i}
+#' is the conditional variance of the variable of interest.
 #'
 #' For details and examples, view the vignette:
 #' \code{vignette("example-usage", package = "regweight")}
@@ -104,15 +105,17 @@ calculate_weights <- function(mod, term) {
     mdf <- stats::model.frame(wt_lm)
     has_na <- "na.action" %in% names(attributes(mdf))
     if (has_na) {
-        na.rows <- attr(mdf, "na.action")
-        n <- nrow(mdf) + length(na.rows)
+        na_rows <- attr(mdf, "na.action")
+        n <- nrow(mdf) + length(na_rows)
         o$weights <- rep(NA, n)
-        o$weights[-na.rows] <- (mdf[[term]] - wt_lm$fitted.values) ^ 2
+        o$weights[-na_rows] <- (mdf[[term]] - wt_lm$fitted.values) ^ 2
     } else {
         o$weights <- (mdf[[term]] - wt_lm$fitted.values) ^ 2
     }
 
-    o$weights <- o$weights / sum(o$weights, na.rm = TRUE) * sum(!is.na(o$weights))
+    o$weights <- (
+        o$weights / sum(o$weights, na.rm = TRUE) * sum(!is.na(o$weights))
+    )
     o$model <- wt_lm
 
     names(o$weights) <- NULL

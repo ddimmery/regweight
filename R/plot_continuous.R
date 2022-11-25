@@ -11,7 +11,8 @@
 #' @param num_eval Number of points at which to evaluate the density.
 #' @param ... unused arguments
 #' @details
-#' Kernel density estimates use the bias-corrected methods of Cattaneo et al (2020).
+#' Kernel density estimates use the bias-corrected methods of
+#' Cattaneo et al (2020).
 #' @return A `ggplot2::ggplot` object.
 #' @examples
 #' y <- rnorm(100)
@@ -23,9 +24,11 @@
 #' plot_weighting_continuous(rw_mod, cov, num_eval = 25)
 #' @seealso [lpdensity::lpdensity()]
 #' @references \itemize{
-#'  \item Cattaneo, Jansson and Ma (2021): lpdensity: Local Polynomial Density Estimation and Inference.
+#'  \item Cattaneo, Jansson and Ma (2021): lpdensity:
+#' Local Polynomial Density Estimation and Inference.
 #' *Journal of Statistical Software*, forthcoming.
-#'  \item Cattaneo, Jansson and Ma (2020): Simple Local Polynomial Density Estimators.
+#'  \item Cattaneo, Jansson and Ma (2020):
+#' Simple Local Polynomial Density Estimators.
 #' *Journal of the American Statistical Association* 115(531): 1449-1455.
 #' }
 #' @importFrom ggplot2 ggplot aes geom_line scale_x_discrete scale_y_continuous
@@ -36,7 +39,13 @@
 #' @importFrom lpdensity lpdensity
 #' @importFrom dplyr tibble %>%
 #' @export
-plot_weighting_continuous <- function(mod, covariate, alpha = 0.05, num_eval = 250, ...) {
+plot_weighting_continuous <- function(
+    mod,
+    covariate,
+    alpha = 0.05,
+    num_eval = 250,
+    ...
+) {
     checkmate::assert_class(mod, "regweight")
     checkmate::assert_numeric(covariate)
 
@@ -64,7 +73,10 @@ plot_weighting_continuous <- function(mod, covariate, alpha = 0.05, num_eval = 2
     )
 
     tbl <- dplyr::tibble(
-        weight = rep(c("Implicit regression", "Nominal"), c(num_eval, num_eval)),
+        weight = rep(
+            c("Implicit regression", "Nominal"),
+            c(num_eval, num_eval)
+        ),
         transp = rep(c(1, 0.5), c(num_eval, num_eval)),
         covariate = c(eval_pts, eval_pts),
         density = c(wkde$Estimate[, "f_p"], kde$Estimate[, "f_p"]),

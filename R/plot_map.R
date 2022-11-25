@@ -25,13 +25,20 @@ plot_weighting_map <- function(mod, geometry, ...) {
     checkmate::assert_class(mod, "regweight")
     checkmate::assert_class(geometry, "sfc")
 
-    df <- dplyr::tibble(weights = mod$weights / sum(mod$weights, na.rm = TRUE), geometry = geometry) %>%
+    df <- dplyr::tibble(
+        weights = mod$weights / sum(mod$weights, na.rm = TRUE),
+        geometry = geometry
+    ) %>%
     sf::st_as_sf()
 
     agg_df <- stats::aggregate(df, by = df$geometry, sum)
 
     ggplot2::ggplot(agg_df) +
-    ggplot2::geom_sf(ggplot2::aes(fill = weights), color = "#bbbbbb", size = 0.05) +
+    ggplot2::geom_sf(
+        ggplot2::aes(fill = weights),
+        color = "#bbbbbb",
+        size = 0.05
+    ) +
     ggplot2::scale_fill_gradient(
         "Implicit regression weight",
         low = "#ffffff",
