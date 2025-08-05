@@ -1,51 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/example-usage.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/calculate_weights.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hist.regweight.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot.regweight.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_weighting_continuous.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_weighting_discrete.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_weighting_map.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summary.regweight.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/articles/example-usage.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/calculate_weights.html</loc></url>
+<url><loc>/reference/hist.regweight.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/plot.regweight.html</loc></url>
+<url><loc>/reference/plot_weighting_continuous.html</loc></url>
+<url><loc>/reference/plot_weighting_discrete.html</loc></url>
+<url><loc>/reference/plot_weighting_map.html</loc></url>
+<url><loc>/reference/summary.regweight.html</loc></url>
 </urlset>
+
