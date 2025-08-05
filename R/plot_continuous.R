@@ -34,10 +34,10 @@
 #' @importFrom ggplot2 ggplot aes geom_line scale_x_discrete scale_y_continuous
 #' @importFrom ggplot2 scale_fill_manual scale_color_manual
 #' @importFrom ggplot2 scale_alpha_continuous scale_linetype_discrete
-#' @importFrom ggplot2 theme_minimal
+#' @importFrom ggplot2 theme_minimal .data
 #' @importFrom checkmate assert_class assert_numeric
 #' @importFrom lpdensity lpdensity
-#' @importFrom dplyr tibble %>%
+#' @importFrom dplyr tibble %>% mutate
 #' @export
 plot_weighting_continuous <- function(
     mod,
@@ -80,22 +80,25 @@ plot_weighting_continuous <- function(
         transp = rep(c(1, 0.5), c(num_eval, num_eval)),
         covariate = c(eval_pts, eval_pts),
         density = c(wkde$Estimate[, "f_p"], kde$Estimate[, "f_p"]),
-        std_error = c(wkde$Estimate[, "se_q"], kde$Estimate[, "se_q"]),
-        lwr = density - stats::qnorm(1 - alpha / 2) * std_error,
-        upr = density + stats::qnorm(1 - alpha / 2) * std_error
+        std_error = c(wkde$Estimate[, "se_q"], kde$Estimate[, "se_q"])
     )
+    tbl <- tbl %>%
+        dplyr::mutate(
+            lwr = tbl[['density']] - stats::qnorm(1 - alpha / 2) * tbl[['std_error']],
+            upr = tbl[['density']] + stats::qnorm(1 - alpha / 2) * tbl[['std_error']]
+        )
 
     ggplot2::ggplot(tbl,
         ggplot2::aes(
-            x = covariate,
-            alpha = transp,
-            color = weight,
-            fill = weight
+            x = .data[["covariate"]],
+            alpha = .data[["transp"]],
+            color = .data[["weight"]],
+            fill = .data[["weight"]]
         )
     ) +
-    ggplot2::geom_line(aes(y = density)) +
-    ggplot2::geom_line(aes(y = lwr), linetype = "dashed") +
-    ggplot2::geom_line(aes(y = upr), linetype = "dashed") +
+    ggplot2::geom_line(ggplot2::aes(y = .data[["density"]])) +
+    ggplot2::geom_line(ggplot2::aes(y = .data[["lwr"]]), linetype = "dashed") +
+    ggplot2::geom_line(ggplot2::aes(y = .data[["upr"]]), linetype = "dashed") +
     ggplot2::scale_x_continuous("") +
     ggplot2::scale_y_continuous("Covariate density") +
     ggplot2::scale_fill_manual("",

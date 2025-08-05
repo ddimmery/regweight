@@ -16,7 +16,7 @@ element of \code{coef(mod)}).}
 }
 \value{
 An object of class \code{regweight} containing:\tabular{ll}{
-\code{term} \tab The term in the regression for which weights were calculated. \cr
+\code{term} \tab Term for which weights were calculated. \cr
 \tab \cr
 \code{model} \tab The partial regression model object. \cr
 \tab \cr
@@ -33,12 +33,13 @@ implicit weights.
 This calculates the implicit regression weights for a particular term
 in a given regression model.
 
-In short, this calculates the weights for a coefficient \eqn{\beta} such that:
+In short, this calculates the weights for a coefficient \eqn{\beta} such
+that:
 
 \deqn{\frac{\mathrm{E}[w_i \beta_i]}{\mathrm{E}[w_i]} \to \beta}
 
-where \eqn{\beta_i} is the unit level effect. The expectation of \eqn{w_i} is the
-conditional variance of the variable of interest.
+where \eqn{\beta_i} is the unit level effect. The expectation of \eqn{w_i}
+is the conditional variance of the variable of interest.
 
 For details and examples, view the vignette:
 \code{vignette("example-usage", package = "regweight")}

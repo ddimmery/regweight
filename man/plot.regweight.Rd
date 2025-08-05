@@ -23,5 +23,6 @@ provided. If covariate type is inappropriately recognized
 please use the appropriate plotting function directly.
 }
 \seealso{
-\code{\link[=calculate_weights]{calculate_weights()}}, \code{\link[=plot_weighting_discrete]{plot_weighting_discrete()}}, \code{\link[=plot_weighting_continuous]{plot_weighting_continuous()}}, \code{\link[=plot_weighting_map]{plot_weighting_map()}}
+\code{\link[=calculate_weights]{calculate_weights()}}, \code{\link[=plot_weighting_discrete]{plot_weighting_discrete()}},
+\code{\link[=plot_weighting_continuous]{plot_weighting_continuous()}}, \code{\link[=plot_weighting_map]{plot_weighting_map()}}
 }

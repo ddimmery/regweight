@@ -126,10 +126,14 @@ summary(
 For the sake of example, let's imagine that we had geographical information on each unit, as well. Geometries/shapes should be specified in `sf::sfc` format.
 
 ```{r fig.width = 6}
-state_shapes <- USAboundaries::us_states()
-state_shapes <- dplyr::filter(state_shapes, !(state_abbr %in% c("HI", "PR", "AK")))
-# Necessary due to https://github.com/r-spatial/sf/issues/1419
-suppressWarnings(sf::st_crs(state_shapes) <- 4326)
+# Download and extract US state boundaries from Census Bureau
+temp_zip <- tempfile(fileext = ".zip")
+temp_dir <- tempdir()
+download.file("https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_20m.zip", 
+              temp_zip, mode = "wb", quiet = TRUE)
+unzip(temp_zip, exdir = temp_dir)
+state_shapes <- sf::st_read(file.path(temp_dir, "cb_2018_us_state_20m.shp"), quiet = TRUE)
+state_shapes <- dplyr::filter(state_shapes, !(STUSPS %in% c("HI", "PR", "AK")))
 pr_state <- seq(1, 10, length = nrow(state_shapes))
 pr_state <- pr_state / sum(pr_state)
 df$geometry <- sample(state_shapes$geometry, nrow(df), replace = TRUE, prob = pr_state)

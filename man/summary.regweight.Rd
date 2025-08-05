@@ -22,7 +22,8 @@ table for inclusion in a paper or report.}
 One of three outputs depending on the requested type:
 \itemize{
 \item \code{tibble}: Returns a \code{tibble} object (see \code{\link[tibble:tibble]{tibble::tibble()}}).
-\item \code{latex}: Returns a \code{knit_asis} object (see \code{\link[knitr:asis_output]{knitr::asis_output()}}).
+\item \code{latex}: Returns a \code{knit_asis} object
+(see \code{\link[knitr:asis_output]{knitr::asis_output()}}).
 \item \code{html}: Returns an \code{html} object (see \code{\link[htmltools:HTML]{htmltools::HTML()}}).
 }
 }

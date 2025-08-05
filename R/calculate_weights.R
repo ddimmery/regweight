@@ -49,7 +49,7 @@ calculate_weights <- function(mod, term) {
     is_lm <- checkmate::test_class(mod, "lm")
     is_lmr <- checkmate::test_class(mod, "lm_robust")
 
-    if (!is_lm & !is_lmr) {
+    if (!is_lm && !is_lmr) {
         rlang::abort(c(
             "Must supply one of the following classes of model object:",
             x = "`stats::lm`",

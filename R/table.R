@@ -20,10 +20,10 @@
 #' }
 #' @importFrom ggplot2 ggplot aes geom_histogram theme_minimal
 #' @importFrom ggplot2 scale_x_log10 expand_limits
-#' @importFrom dplyr %>% group_by summarize mutate n
+#' @importFrom dplyr %>% group_by summarize mutate n .data
 #' @importFrom tidyr pivot_longer
 #' @importFrom rlang abort
-#' @importFrom tidyselect vars_select_helpers
+#' @importFrom tidyselect vars_select_helpers starts_with all_of
 #' @export
 summary.regweight <- function(object, df, output = "tibble", ...) {
     df$.weight <- object$weights
@@ -31,7 +31,7 @@ summary.regweight <- function(object, df, output = "tibble", ...) {
     where_short <- tidyselect::vars_select_helpers$where
     df %>%
         dplyr::select(
-            .weight,
+            .data[[".weight"]],
             where_short(checkmate::test_factor),
             where_short(checkmate::test_character),
             where_short(few_unique)
@@ -41,20 +41,20 @@ summary.regweight <- function(object, df, output = "tibble", ...) {
     } else {
         df_discrete %>%
         tidyr::pivot_longer(
-            cols = !.weight,
+            cols = !tidyselect::all_of(".weight"),
             names_to = "covariate",
             values_transform = list(value = as.character)
         ) -> df_discrete
 
         result_discrete <- df_discrete %>%
-            dplyr::group_by(covariate) %>%
-            dplyr::summarize(summary_of_discrete(dplyr::cur_data())) %>%
+            dplyr::group_by(.data[["covariate"]]) %>%
+            dplyr::reframe(summary_of_discrete(dplyr::pick(dplyr::everything()))) %>%
             dplyr::ungroup()
     }
 
     df %>%
         dplyr::select(
-            .weight,
+            .data[[".weight"]],
             !(
                 where_short(checkmate::test_factor) |
                 where_short(checkmate::test_character) |
@@ -67,14 +67,14 @@ summary.regweight <- function(object, df, output = "tibble", ...) {
     } else {
         df_cts %>%
             tidyr::pivot_longer(
-                cols = dplyr::everything() & !dplyr::all_of(".weight"),
+                cols = dplyr::everything() & !tidyselect::all_of(".weight"),
                 names_to = "covariate",
                 values_transform = list(values = as.numeric)
             ) -> df_cts
 
         result_cts <- df_cts %>%
-            dplyr::group_by(covariate) %>%
-            dplyr::summarize(summary_of_continuous(dplyr::cur_data())) %>%
+            dplyr::group_by(.data[["covariate"]]) %>%
+            dplyr::reframe(summary_of_continuous(dplyr::pick(dplyr::everything()))) %>%
             dplyr::ungroup()
     }
 
@@ -131,42 +131,42 @@ format_result <- function(tbl_discrete, tbl_cts, type) {
         tbl_cts
     ) %>%
     tidyr::pivot_wider(
-        id_cols = c(covariate, value),
-        names_from = sample,
-        values_from = c(mean, std_dev)
+        id_cols = tidyselect::all_of(c("covariate", "value")),
+        names_from = tidyselect::all_of("sample"),
+        values_from = tidyselect::all_of(c("mean", "std_dev"))
     )
 
     tbl %>%
     mutate(
         covariate = dplyr::if_else(
-            duplicated(covariate),
+            duplicated(.data[["covariate"]]),
             "",
-            covariate
+            .data[["covariate"]]
         )
     ) %>%
     gt::gt(rowname_col = "covariate") %>%
     gt::tab_stubhead(label = "Covariate") %>%
     gt::tab_row_group(
         label = "Discrete variables",
-        rows = which(is.na(tbl$std_dev_Nominal))
+        rows = which(is.na(tbl[["std_dev_Nominal"]]))
     ) %>%
     gt::tab_row_group(
         label = "Continuous variables",
-        rows = which(is.na(tbl$value))
+        rows = which(is.na(tbl[["value"]]))
     ) %>%
     gt::row_group_order(
       groups = c("Discrete variables", "Continuous variables")
     ) %>%
     gt::tab_spanner(
         label = "Nominal",
-        columns = c(mean_Nominal, std_dev_Nominal)
+        columns = tidyselect::all_of(c("mean_Nominal", "std_dev_Nominal"))
     ) %>%
     gt::tab_spanner(
         label = "Implicit",
-        columns = c(mean_Implicit, std_dev_Implicit)
+        columns = tidyselect::all_of(c("mean_Implicit", "std_dev_Implicit"))
     ) %>%
     gt::fmt_number(
-        columns = c(starts_with("mean"), starts_with("std")),
+        columns = c(tidyselect::starts_with("mean"), tidyselect::starts_with("std")),
         n_sigfig = 3
     ) %>%
     gt::sub_missing(
@@ -187,24 +187,24 @@ format_result <- function(tbl_discrete, tbl_cts, type) {
 #' @noRd
 summary_of_discrete <- function(df) {
     df %>%
-        dplyr::group_by(value) %>%
+        dplyr::group_by(.data[["value"]]) %>%
         dplyr::summarize(
             n = n(),
-            sum_weight = sum(.weight, na.rm = TRUE)
+            sum_weight = sum(.data[[".weight"]], na.rm = TRUE)
         ) %>%
         dplyr::ungroup() %>%
         dplyr::mutate(
-            unweighted = n / sum(n),
-            weighted = sum_weight / sum(sum_weight, na.rm = TRUE)
+            unweighted = .data[["n"]] / sum(.data[["n"]]),
+            weighted = .data[["sum_weight"]] / sum(.data[["sum_weight"]], na.rm = TRUE)
         ) %>%
-        dplyr::group_by(value) %>%
-        dplyr::summarize(
+        dplyr::group_by(.data[["value"]]) %>%
+        dplyr::reframe(
             sample = c("Nominal", "Implicit"),
-            mean = c(unweighted, weighted),
+            mean = c(.data[["unweighted"]], .data[["weighted"]]),
             std_dev = c(NA, NA)
         ) %>%
         dplyr::select(
-            value, sample, mean, std_dev
+            tidyselect::all_of(c("value", "sample", "mean", "std_dev"))
         )
 }
 
@@ -213,34 +213,34 @@ summary_of_discrete <- function(df) {
 summary_of_continuous <- function(df) {
     df %>%
         dplyr::ungroup() %>%
-        dplyr::summarize(
+        dplyr::reframe(
             sample = c("Nominal", "Implicit"),
             mean = c(
-                mean(value, na.rm = TRUE),
+                mean(.data[["value"]], na.rm = TRUE),
                 stats::weighted.mean(
-                    value[!is.na(.weight)],
-                    .weight[!is.na(.weight)],
+                    .data[["value"]][!is.na(.data[[".weight"]])],
+                    .data[[".weight"]][!is.na(.data[[".weight"]])],
                     na.rm = TRUE
                 )
             ),
             std_dev = c(
-                stats::sd(value, na.rm = TRUE),
+                stats::sd(.data[["value"]], na.rm = TRUE),
                 sqrt(stats::weighted.mean(
                     (
-                        value[!is.na(.weight)] -
+                        .data[["value"]][!is.na(.data[[".weight"]])] -
                         stats::weighted.mean(
-                            value[!is.na(.weight)],
-                            .weight[!is.na(.weight)],
+                            .data[["value"]][!is.na(.data[[".weight"]])],
+                            .data[[".weight"]][!is.na(.data[[".weight"]])],
                             na.rm = TRUE
                         )
                     ) ^ 2,
-                    .weight[!is.na(.weight)],
+                    .data[[".weight"]][!is.na(.data[[".weight"]])],
                     na.rm = TRUE
                 ))
             ),
             value = c(NA, NA),
         ) %>%
         dplyr::select(
-            value, sample, mean, std_dev
+            tidyselect::all_of(c("value", "sample", "mean", "std_dev"))
         )
 }

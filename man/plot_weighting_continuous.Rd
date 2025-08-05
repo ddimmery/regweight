@@ -28,7 +28,8 @@ defined by the Aronow and Samii (2015) \doi{10.1111/ajps.12185} regression
 weights.
 }
 \details{
-Kernel density estimates use the bias-corrected methods of Cattaneo et al (2020).
+Kernel density estimates use the bias-corrected methods of
+Cattaneo et al (2020).
 }
 \examples{
 y <- rnorm(100)
@@ -41,9 +42,11 @@ plot_weighting_continuous(rw_mod, cov, num_eval = 25)
 }
 \references{
 \itemize{
-\item Cattaneo, Jansson and Ma (2021): lpdensity: Local Polynomial Density Estimation and Inference.
+\item Cattaneo, Jansson and Ma (2021): lpdensity:
+Local Polynomial Density Estimation and Inference.
 \emph{Journal of Statistical Software}, forthcoming.
-\item Cattaneo, Jansson and Ma (2020): Simple Local Polynomial Density Estimators.
+\item Cattaneo, Jansson and Ma (2020):
+Simple Local Polynomial Density Estimators.
 \emph{Journal of the American Statistical Association} 115(531): 1449-1455.
 }
 }

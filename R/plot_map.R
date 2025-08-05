@@ -12,7 +12,7 @@
 #' @importFrom ggplot2 ggplot aes geom_line scale_x_discrete scale_y_continuous
 #' @importFrom ggplot2 scale_fill_manual scale_color_manual
 #' @importFrom ggplot2 scale_alpha_continuous scale_linetype_discrete
-#' @importFrom ggplot2 theme_void geom_sf
+#' @importFrom ggplot2 theme_void geom_sf .data
 #' @importFrom scales percent
 #' @importFrom checkmate assert_class
 #' @importFrom dplyr tibble %>%
@@ -35,7 +35,7 @@ plot_weighting_map <- function(mod, geometry, ...) {
 
     ggplot2::ggplot(agg_df) +
     ggplot2::geom_sf(
-        ggplot2::aes(fill = weights),
+        ggplot2::aes(fill = .data[["weights"]]),
         color = "#bbbbbb",
         size = 0.05
     ) +
