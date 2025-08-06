@@ -40,72 +40,74 @@
 #' @importFrom dplyr tibble %>% mutate
 #' @export
 plot_weighting_continuous <- function(
-    mod,
-    covariate,
-    alpha = 0.05,
-    num_eval = 250,
-    ...
+  mod,
+  covariate,
+  alpha = 0.05,
+  num_eval = 250,
+  ...
 ) {
-    checkmate::assert_class(mod, "regweight")
-    checkmate::assert_numeric(covariate)
+  checkmate::assert_class(mod, "regweight")
+  checkmate::assert_numeric(covariate)
 
-    ok <- stats::complete.cases(covariate, mod$weights)
-    n <- sum(ok)
-    covariate <- covariate[ok]
-    wts <- mod$weights[ok]
+  ok <- stats::complete.cases(covariate, mod$weights)
+  n <- sum(ok)
+  covariate <- covariate[ok]
+  wts <- mod$weights[ok]
 
-    range <- stats::quantile(covariate, probs = c(0.05, 0.95))
-    eval_pts <- seq(range[1], range[2], length = num_eval)
+  range <- stats::quantile(covariate, probs = c(0.05, 0.95))
+  eval_pts <- seq(range[1], range[2], length = num_eval)
 
-    wkde <- lpdensity::lpdensity(
-        covariate,
-        grid = eval_pts,
-        Pweights = wts / sum(wts) * n,
-        kernel = "epanechnikov",
-        bwselect = "imse-dpi"
+  wkde <- lpdensity::lpdensity(
+    covariate,
+    grid = eval_pts,
+    Pweights = wts / sum(wts) * n,
+    kernel = "epanechnikov",
+    bwselect = "imse-dpi"
+  )
+
+  kde <- lpdensity::lpdensity(
+    covariate,
+    grid = eval_pts,
+    kernel = "epanechnikov",
+    bwselect = "imse-dpi"
+  )
+
+  tbl <- dplyr::tibble(
+    weight = rep(
+      c("Implicit regression", "Nominal"),
+      c(num_eval, num_eval)
+    ),
+    transp = rep(c(1, 0.5), c(num_eval, num_eval)),
+    covariate = c(eval_pts, eval_pts),
+    density = c(wkde$Estimate[, "f_p"], kde$Estimate[, "f_p"]),
+    std_error = c(wkde$Estimate[, "se_q"], kde$Estimate[, "se_q"])
+  )
+  tbl <- tbl %>%
+    dplyr::mutate(
+      lwr = tbl[["density"]] -
+        stats::qnorm(1 - alpha / 2) * tbl[["std_error"]],
+      upr = tbl[["density"]] +
+        stats::qnorm(1 - alpha / 2) * tbl[["std_error"]]
     )
 
-    kde <- lpdensity::lpdensity(
-        covariate,
-        grid = eval_pts,
-        kernel = "epanechnikov",
-        bwselect = "imse-dpi"
+  ggplot2::ggplot(tbl,
+    ggplot2::aes(
+      x = .data[["covariate"]],
+      alpha = .data[["transp"]],
+      color = .data[["weight"]],
+      fill = .data[["weight"]]
     )
-
-    tbl <- dplyr::tibble(
-        weight = rep(
-            c("Implicit regression", "Nominal"),
-            c(num_eval, num_eval)
-        ),
-        transp = rep(c(1, 0.5), c(num_eval, num_eval)),
-        covariate = c(eval_pts, eval_pts),
-        density = c(wkde$Estimate[, "f_p"], kde$Estimate[, "f_p"]),
-        std_error = c(wkde$Estimate[, "se_q"], kde$Estimate[, "se_q"])
-    )
-    tbl <- tbl %>%
-        dplyr::mutate(
-            lwr = tbl[['density']] - stats::qnorm(1 - alpha / 2) * tbl[['std_error']],
-            upr = tbl[['density']] + stats::qnorm(1 - alpha / 2) * tbl[['std_error']]
-        )
-
-    ggplot2::ggplot(tbl,
-        ggplot2::aes(
-            x = .data[["covariate"]],
-            alpha = .data[["transp"]],
-            color = .data[["weight"]],
-            fill = .data[["weight"]]
-        )
-    ) +
+  ) +
     ggplot2::geom_line(ggplot2::aes(y = .data[["density"]])) +
     ggplot2::geom_line(ggplot2::aes(y = .data[["lwr"]]), linetype = "dashed") +
     ggplot2::geom_line(ggplot2::aes(y = .data[["upr"]]), linetype = "dashed") +
     ggplot2::scale_x_continuous("") +
     ggplot2::scale_y_continuous("Covariate density") +
     ggplot2::scale_fill_manual("",
-        values = c("Implicit regression" = "black", "Nominal" = "red")
+      values = c("Implicit regression" = "black", "Nominal" = "red")
     ) +
     ggplot2::scale_color_manual("",
-        values = c("Implicit regression" = "black", "Nominal" = "red")
+      values = c("Implicit regression" = "black", "Nominal" = "red")
     ) +
     ggplot2::scale_alpha_continuous(guide = "none", limits = c(0, 1)) +
     ggplot2::scale_linetype_discrete(guide = "none") +

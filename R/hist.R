@@ -14,15 +14,16 @@
 #' @importFrom rlang abort
 #' @export
 hist.regweight <- function(x, bw = NULL, ...) {
-    if (is.null(bw)) {
-        # Freedman-Diaconis rule
-        bw <- (
-            2 * stats::IQR(x$weights, na.rm = TRUE)
-            /
-            sum(!is.na(x$weights)) ^ (1 / 3)
-        )
-    }
-    ggplot2::ggplot(dplyr::tibble(w = x$weights), ggplot2::aes(x = .data[["w"]])) +
+  if (is.null(bw)) {
+    # Freedman-Diaconis rule
+    bw <- (
+      2 * stats::IQR(x$weights, na.rm = TRUE) /
+        sum(!is.na(x$weights)) ^ (1 / 3)
+    )
+  }
+  ggplot2::ggplot(
+    dplyr::tibble(w = x$weights), ggplot2::aes(x = .data[["w"]])
+  ) +
     ggplot2::geom_histogram(binwidth = bw) +
     ggplot2::scale_x_log10("Weight (log scale)") +
     ggplot2::scale_y_continuous("Count") +

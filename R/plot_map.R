@@ -20,30 +20,30 @@
 #' @importFrom rlang check_installed
 #' @export
 plot_weighting_map <- function(mod, geometry, ...) {
-    rlang::check_installed("sf")
-    try(attachNamespace("sf"), silent = TRUE)
-    checkmate::assert_class(mod, "regweight")
-    checkmate::assert_class(geometry, "sfc")
+  rlang::check_installed("sf")
+  try(attachNamespace("sf"), silent = TRUE)
+  checkmate::assert_class(mod, "regweight")
+  checkmate::assert_class(geometry, "sfc")
 
-    df <- dplyr::tibble(
-        weights = mod$weights / sum(mod$weights, na.rm = TRUE),
-        geometry = geometry
-    ) %>%
+  df <- dplyr::tibble(
+    weights = mod$weights / sum(mod$weights, na.rm = TRUE),
+    geometry = geometry
+  ) %>%
     sf::st_as_sf()
 
-    agg_df <- stats::aggregate(df, by = df$geometry, sum)
+  agg_df <- stats::aggregate(df, by = df$geometry, sum)
 
-    ggplot2::ggplot(agg_df) +
+  ggplot2::ggplot(agg_df) +
     ggplot2::geom_sf(
-        ggplot2::aes(fill = .data[["weights"]]),
-        color = "#bbbbbb",
-        size = 0.05
+      ggplot2::aes(fill = .data[["weights"]]),
+      color = "#bbbbbb",
+      size = 0.05
     ) +
     ggplot2::scale_fill_gradient(
-        "Implicit regression weight",
-        low = "#ffffff",
-        high = "#000000",
-        labels = scales::percent
+      "Implicit regression weight",
+      low = "#ffffff",
+      high = "#000000",
+      labels = scales::percent
     ) +
     ggplot2::theme_void() +
     ggplot2::theme(legend.position = "bottom")

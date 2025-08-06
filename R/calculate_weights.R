@@ -46,80 +46,81 @@
 #' @importFrom glue glue
 #' @export
 calculate_weights <- function(mod, term) {
-    is_lm <- checkmate::test_class(mod, "lm")
-    is_lmr <- checkmate::test_class(mod, "lm_robust")
+  is_lm <- checkmate::test_class(mod, "lm")
+  is_lmr <- checkmate::test_class(mod, "lm_robust")
 
-    if (!is_lm && !is_lmr) {
-        rlang::abort(c(
-            "Must supply one of the following classes of model object:",
-            x = "`stats::lm`",
-            x = "`estimatr::lm_robust`"
-        ),
-        class = "regweight_model_argument"
-        )
-    }
-
-    is_char <- checkmate::test_character(term, len = 1)
-    if (!is_char) {
-        rlang::abort(
-            "`term` argument must be a character vector of length 1.",
-            class = "regweight_term_argument"
-        )
-    }
-
-    terms <- names(stats::coef(mod))
-    term_of_interest <- grep(term, terms, value = TRUE)
-
-    if (length(term_of_interest) < 1) {
-        rlang::abort(
-            c(
-                "Provided `term` matches no terms in the model.",
-                i = "Valid terms are:",
-                paste(terms, collapse = ", ")
-            ),
-            class = "regweight_term_argument"
-        )
-    }
-
-    if (length(term_of_interest) > 1) {
-        rlang::abort(
-            c(
-                "Provided `term` matches multiple terms in the model.",
-                i = glue::glue("Provided term, `{term}`, matches:"),
-                term_of_interest
-            ),
-            class = "regweight_term_argument"
-        )
-    }
-
-    new_fm <- stats::update(
-        stats::formula(mod),
-        glue::glue("{term} ~ . - {term}")
+  if (!is_lm && !is_lmr) {
+    rlang::abort(
+      c(
+        "Must supply one of the following classes of model object:",
+        x = "`stats::lm`",
+        x = "`estimatr::lm_robust`"
+      ),
+      class = "regweight_model_argument"
     )
+  }
 
-    wt_lm <- stats::update(mod, new_fm)
-
-    o <- list()
-
-    o$term <- term
-    mdf <- stats::model.frame(wt_lm)
-    has_na <- "na.action" %in% names(attributes(mdf))
-    if (has_na) {
-        na_rows <- attr(mdf, "na.action")
-        n <- nrow(mdf) + length(na_rows)
-        o$weights <- rep(NA, n)
-        o$weights[-na_rows] <- (mdf[[term]] - wt_lm$fitted.values) ^ 2
-    } else {
-        o$weights <- (mdf[[term]] - wt_lm$fitted.values) ^ 2
-    }
-
-    o$weights <- (
-        o$weights / sum(o$weights, na.rm = TRUE) * sum(!is.na(o$weights))
+  is_char <- checkmate::test_character(term, len = 1)
+  if (!is_char) {
+    rlang::abort(
+      "`term` argument must be a character vector of length 1.",
+      class = "regweight_term_argument"
     )
-    o$model <- wt_lm
+  }
 
-    names(o$weights) <- NULL
+  terms <- names(stats::coef(mod))
+  term_of_interest <- grep(term, terms, value = TRUE)
 
-    class(o) <- "regweight"
-    o
+  if (length(term_of_interest) < 1) {
+    rlang::abort(
+      c(
+        "Provided `term` matches no terms in the model.",
+        i = "Valid terms are:",
+        paste(terms, collapse = ", ")
+      ),
+      class = "regweight_term_argument"
+    )
+  }
+
+  if (length(term_of_interest) > 1) {
+    rlang::abort(
+      c(
+        "Provided `term` matches multiple terms in the model.",
+        i = glue::glue("Provided term, `{term}`, matches:"),
+        term_of_interest
+      ),
+      class = "regweight_term_argument"
+    )
+  }
+
+  new_fm <- stats::update(
+    stats::formula(mod),
+    glue::glue("{term} ~ . - {term}")
+  )
+
+  wt_lm <- stats::update(mod, new_fm)
+
+  o <- list()
+
+  o$term <- term
+  mdf <- stats::model.frame(wt_lm)
+  has_na <- "na.action" %in% names(attributes(mdf))
+  if (has_na) {
+    na_rows <- attr(mdf, "na.action")
+    n <- nrow(mdf) + length(na_rows)
+    o$weights <- rep(NA, n)
+    o$weights[-na_rows] <- (mdf[[term]] - wt_lm$fitted.values) ^ 2
+  } else {
+    o$weights <- (mdf[[term]] - wt_lm$fitted.values) ^ 2
+  }
+
+  o$weights <- (
+    o$weights / sum(o$weights, na.rm = TRUE) * sum(!is.na(o$weights))
+  )
+  o$model <- wt_lm
+
+  names(o$weights) <- NULL
+
+  class(o) <- "regweight"
+  o
 }

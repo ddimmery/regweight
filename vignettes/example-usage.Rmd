@@ -22,7 +22,7 @@ div.main-container {
 </style>
 
 ```{r echo=FALSE}
-knitr::opts_chunk$set(fig.width = 5, fig.height = 5) 
+knitr::opts_chunk$set(fig.width = 5, fig.height = 5)
 ```
 
 # Introduction
@@ -68,7 +68,8 @@ df <- dplyr::filter(
 )
 
 model <- lm(
-  log(re78 + 1) ~ treat + age + educ + black + hisp + married + nodegr + log(re74 + 1) + log(re75 + 1) + re74.miss, 
+  log(re78 + 1) ~ treat + age + educ + black + hisp + married + nodegr +
+    log(re74 + 1) + log(re75 + 1) + re74.miss,
   df
 )
 summary(model)
@@ -129,14 +130,20 @@ For the sake of example, let's imagine that we had geographical information on e
 # Download and extract US state boundaries from Census Bureau
 temp_zip <- tempfile(fileext = ".zip")
 temp_dir <- tempdir()
-download.file("https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_20m.zip", 
-              temp_zip, mode = "wb", quiet = TRUE)
+download.file(
+  "https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_20m.zip",
+  temp_zip, mode = "wb", quiet = TRUE
+)
 unzip(temp_zip, exdir = temp_dir)
-state_shapes <- sf::st_read(file.path(temp_dir, "cb_2018_us_state_20m.shp"), quiet = TRUE)
+state_shapes <- sf::st_read(
+  file.path(temp_dir, "cb_2018_us_state_20m.shp"), quiet = TRUE
+)
 state_shapes <- dplyr::filter(state_shapes, !(STUSPS %in% c("HI", "PR", "AK")))
 pr_state <- seq(1, 10, length = nrow(state_shapes))
 pr_state <- pr_state / sum(pr_state)
-df$geometry <- sample(state_shapes$geometry, nrow(df), replace = TRUE, prob = pr_state)
+df$geometry <- sample(
+  state_shapes$geometry, nrow(df), replace = TRUE, prob = pr_state
+)
 
 plot(rw_mod, df$geometry)
 ```
