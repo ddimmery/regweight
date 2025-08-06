@@ -46,6 +46,10 @@ jobs:
         if: runner.os == 'macos'
         run: brew install gdal proj
 
+      - name: Install GDAL system dependencies (devel only)
+        if: runner.os == 'Linux' && matrix.config == 'devel'
+        run: sudo apt-get update && sudo apt-get install -y libgdal-dev
+
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
