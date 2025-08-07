@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![codecov](https://codecov.io/gh/ddimmery/regweight/branch/main/graph/badge.svg?token=OG7J5YE3JB)](https://app.codecov.io/gh/ddimmery/regweight)
-[![R-CMD-check](https://github.com/ddimmery/regweight/actions/workflows/check-full.yaml/badge.svg)](https://github.com/ddimmery/regweight/actions/workflows/check-full.yaml)
+[![R-CMD-check](https://github.com/ddimmery/regweight/actions/workflows/r-cmd-check.yaml/badge.svg)](https://github.com/ddimmery/regweight/actions/workflows/check-full.yaml)
 [![lint](https://github.com/ddimmery/regweight/actions/workflows/lint.yaml/badge.svg)](https://github.com/ddimmery/regweight/actions/workflows/lint.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/regweight)](https://CRAN.R-project.org/package=regweight)
