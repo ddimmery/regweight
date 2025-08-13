@@ -52,8 +52,13 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck, any::sf
+          extra-packages: any::rcmdcheck
           needs: check
+
+      - name: Install sf from source
+        if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'devel'
+        run: |
+          Rscript -e "install.packages('sf', type='source')"
 
       - uses: r-lib/actions/check-r-package@v2
         with:
